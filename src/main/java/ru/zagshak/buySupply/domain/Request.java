@@ -13,30 +13,27 @@ public class Request extends AbstractBaseEntity {
     @NotNull
     private boolean responced;
 
-    @Column(name = "amount", nullable = false)
-    @NotNull
-    private Integer amount;
+    @Column(name = "message", nullable = false)
+    private String message;
 
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private Offer offer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requester_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private User requester;
 
     public Request() {
     }
 
-    public Request(Integer id, @NotNull boolean responced, @NotNull Integer amount, @NotNull Offer offer, @NotNull User requester) {
+    public Request(Integer id, @NotNull boolean responced, String message, Offer offer, User requester) {
         super(id);
         this.responced = responced;
-        this.amount = amount;
+        this.message = message;
         this.offer = offer;
         this.requester = requester;
     }
@@ -49,12 +46,12 @@ public class Request extends AbstractBaseEntity {
         this.responced = responced;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public String getMessage() {
+        return message;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setMessage(Integer amount) {
+        this.message = message;
     }
 
     public Offer getOffer() {
