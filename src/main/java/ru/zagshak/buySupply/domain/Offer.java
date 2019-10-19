@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Offer extends AbstractBaseEntity {
 
-    @Column(name = "buyOffer", nullable = false, unique = true)
+    @Column(name = "buy_offer", nullable = false, unique = true)
     private boolean buyOffer;
 
     @Column(name = "description", nullable = false, unique = true)
@@ -18,7 +18,7 @@ public class Offer extends AbstractBaseEntity {
     @JoinColumn(name = "offerer_id", nullable = false)
     private User offerer;
 
-    @Column(name = "dateTime", nullable = false, unique = true)
+    @Column(name = "date_time", nullable = false, unique = true)
     private LocalDateTime dateTime;
 
 
