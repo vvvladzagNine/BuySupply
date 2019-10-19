@@ -44,8 +44,17 @@ public class User extends AbstractNamedEntity {
     @BatchSize(size = 200)
     private Set<Role> roles;
 
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "requester")
     private List<Request> requests;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "offerer")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Offer> offers;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "estimated")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Estimate> estimates;
+
+
 
 
 
