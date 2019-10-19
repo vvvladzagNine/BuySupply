@@ -9,11 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Set;
-
+import java.util.*;
 
 
 @Entity
@@ -47,6 +43,14 @@ public class User extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @BatchSize(size = 200)
     private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "offerer")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Offer> offers;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "estimated")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Estimate> estimates;
+
+
 
 
 
