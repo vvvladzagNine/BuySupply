@@ -4,7 +4,8 @@ public enum Category {
 
     FOOD,
     CLOTHES,
-    ELECTRONICS;
+    ELECTRONICS,
+    LUMBER;
 
 
 
