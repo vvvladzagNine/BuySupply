@@ -24,8 +24,8 @@ public class RequestRepoImpl implements RequestRepo {
         if (!request.isNew() && get(request.getId()) == null ) {
             return null;
         }
-        request.setRequester(userRepo.getOne(userId));
         request.setOffer(offerRepo.getOne(offerId));
+        request.setRequester(userRepo.getOne(userId));
         return requestRepo.save(request);
     }
 
