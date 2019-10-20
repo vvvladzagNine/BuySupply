@@ -36,7 +36,6 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private Date registered = new Date();
 
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")

@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS request CASCADE ;
-DROP TABLE IF EXISTS estimate CASCADE ;
-DROP TABLE IF EXISTS offer CASCADE ;
-DROP TABLE IF EXISTS user_roles CASCADE ;
-DROP TABLE IF EXISTS users CASCADE ;
+DROP TABLE IF EXISTS request ;
+DROP TABLE IF EXISTS estimate ;
+DROP TABLE IF EXISTS offer ;
+DROP TABLE IF EXISTS user_roles ;
+DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START WITH 100000;
@@ -39,6 +39,16 @@ CREATE TABLE offer
 
 
 );
+
+CREATE TABLE offer_categories
+(
+    offer_id INTEGER NOT NULL,
+    category    VARCHAR,
+    CONSTRAINT offer_categories_idx UNIQUE (offer_id, category),
+    FOREIGN KEY (offer_id) REFERENCES offer (id) ON DELETE CASCADE
+);
+
+
 
 CREATE TABLE request
 (

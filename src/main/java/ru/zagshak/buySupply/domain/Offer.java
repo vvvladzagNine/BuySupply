@@ -1,7 +1,10 @@
 package ru.zagshak.buySupply.domain;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Offer extends AbstractBaseEntity {
@@ -20,6 +23,14 @@ public class Offer extends AbstractBaseEntity {
 
     @Column(name = "date_time", nullable = false, unique = true)
     private LocalDateTime dateTime;
+
+
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "offer_categories", joinColumns = @JoinColumn(name = "offer_id"))
+    @Column(name = "category")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
+    private Set<Category> categories;
 
 
     public Offer() {
