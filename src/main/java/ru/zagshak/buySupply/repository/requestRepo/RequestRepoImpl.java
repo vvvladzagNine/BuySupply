@@ -1,10 +1,12 @@
 package ru.zagshak.buySupply.repository.requestRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 
+@Repository
 public class RequestRepoImpl implements RequestRepo {
 
     @Autowired
