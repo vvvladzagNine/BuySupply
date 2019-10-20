@@ -59,7 +59,9 @@ CREATE TABLE estimate
     comment          VARCHAR NOT NULL,
     stars            INTEGER NOT NULL ,
     estimated_id     INTEGER NOT NULL,
-    FOREIGN KEY (estimated_id) REFERENCES users (id) ON DELETE CASCADE
+    estimator_id     INTEGER NOT NULL,
+    FOREIGN KEY (estimated_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (estimator_id) REFERENCES users (id) ON DELETE CASCADE
 
 );
 

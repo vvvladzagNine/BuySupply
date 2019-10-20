@@ -15,6 +15,10 @@ public class Estimate extends AbstractBaseEntity {
     @JoinColumn(name = "estimated_id", nullable = false)
     private User estimated;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "estimator_id", nullable = false)
+    private User estimator;
+
 
     public Estimate() {
     }
