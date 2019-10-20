@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.zagshak.buySupply.domain.User;
 import ru.zagshak.buySupply.repository.userRepo.UserRepo;
+import ru.zagshak.buySupply.util.exception.NotFoundException;
 
 import java.util.List;
+
+import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UserService {
@@ -19,18 +22,18 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public void update(User user) /*throws NotFoundException*/ {
+    public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        //checkNotFoundWithId(repository.save(user), user.getId());
+        checkNotFoundWithId(userRepo.save(user), user.getId());
     }
 
     public void delete(int id) {
-        //checkNotFoundWithId(userRepo.delete(id), id);
+        checkNotFoundWithId(userRepo.delete(id), id);
     }
 
     public User get(int id) /*throws NotFoundException*/ {
-        //return checkNotFoundWithId(userRepo.get(id),id);
-        return null;
+        return checkNotFoundWithId(userRepo.get(id),id);
+
     }
 
     public User getByEmail(String email) /*throws NotFoundException*/ {

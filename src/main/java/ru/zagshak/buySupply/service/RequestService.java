@@ -7,6 +7,8 @@ import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepo;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepoImpl;
 
+import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
+
 @Service
 public class RequestService {
 
@@ -23,11 +25,11 @@ public class RequestService {
     }
 
     public void delete(int id, int userId) {
-        //checkNotFoundWithId(requestRepo.delete(id, userId), id);
+        checkNotFoundWithId(requestRepo.delete(id, userId), id);
     }
 
     public void update(Request request, int offerId, int userId) {
         Assert.notNull(request, "request must not be null");
-       //checkNotFoundWithId(requestRepo.save(request, offerId, userId), offerId);
+       checkNotFoundWithId(requestRepo.save(request, offerId, userId), offerId);
     }
 }
