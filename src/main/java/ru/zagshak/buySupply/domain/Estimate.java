@@ -23,5 +23,35 @@ public class Estimate extends AbstractBaseEntity {
     public Estimate() {
     }
 
+    public String getComment() {
+        return comment;
+    }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
+    public User getEstimated() {
+        return estimated;
+    }
+
+    public void setEstimated(User estimated) {
+        this.estimated = estimated;
+    }
+
+    public User getEstimator() {
+        return estimator;
+    }
+
+    public void setEstimator(User estimator) {
+        this.estimator = estimator;
+    }
 }

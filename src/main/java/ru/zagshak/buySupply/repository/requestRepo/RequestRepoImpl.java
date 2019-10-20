@@ -2,6 +2,7 @@ package ru.zagshak.buySupply.repository.requestRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.zagshak.buySupply.domain.Request;
+import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 
 public class RequestRepoImpl implements RequestRepo {
@@ -12,6 +13,9 @@ public class RequestRepoImpl implements RequestRepo {
     @Autowired
     private RequestJpaRepo requestRepo;
 
+    @Autowired
+    private OfferJPARepo offerRepo;
+
 
     @Override
     public Request save(Request request, int offerId, int userId) {
@@ -19,7 +23,7 @@ public class RequestRepoImpl implements RequestRepo {
             return null;
         }
         request.setRequester(userRepo.getOne(userId));
-        request.setOffer(null);
+        request.setOffer(offerRepo.getOne(offerId));
         return requestRepo.save(request);
     }
 
