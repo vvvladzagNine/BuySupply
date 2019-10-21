@@ -9,28 +9,38 @@ import java.util.Set;
 @Entity
 public class Offer extends AbstractBaseEntity {
 
-    @Column(name = "buy_offer", nullable = false, unique = true)
+    @Column(name = "buy_offer", nullable = false)
     private boolean buyOffer;
 
-    @Column(name = "description", nullable = false, unique = true)
+    @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "cost", nullable = false, unique = true)
+
+
+    @Column(name = "amount", nullable = false, unique = true)
+    private int amount;
+
+    @Column(name = "cost", nullable = false)
     private Integer cost;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "offerer_id", nullable = false)
     private User offerer;
 
-    @Column(name = "date_time", nullable = false, unique = true)
+    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
 
 
-    @Enumerated(EnumType.STRING)
+
     @CollectionTable(name = "offer_categories", joinColumns = @JoinColumn(name = "offer_id"))
     @Column(name = "category")
     @ElementCollection(fetch = FetchType.EAGER)
     @BatchSize(size = 200)
-    private Set<Category> categories;
+    private Set<String> categories;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
 
     public Offer() {

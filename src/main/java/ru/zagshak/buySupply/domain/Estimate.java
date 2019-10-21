@@ -1,6 +1,7 @@
 package ru.zagshak.buySupply.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Estimate extends AbstractBaseEntity {
@@ -18,6 +19,9 @@ public class Estimate extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "estimator_id", nullable = false)
     private User estimator;
+
+    @Column(name = "date_time", nullable = false)
+    private LocalDateTime dateTime;
 
 
     public Estimate() {
