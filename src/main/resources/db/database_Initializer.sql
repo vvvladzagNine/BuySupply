@@ -53,16 +53,6 @@ CREATE TABLE offer
 
 );
 
-CREATE TABLE offer_categories
-(
-    offer_id INTEGER NOT NULL,
-    category    VARCHAR,
-    CONSTRAINT offer_categories_idx UNIQUE (offer_id, category),
-    FOREIGN KEY (offer_id) REFERENCES offer (id) ON DELETE CASCADE
-);
-
-
-
 CREATE TABLE request
 (
     id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),

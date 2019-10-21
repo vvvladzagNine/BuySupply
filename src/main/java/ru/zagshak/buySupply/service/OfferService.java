@@ -7,6 +7,8 @@ import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.repository.offerRepo.OfferRepoImpl;
 
+import java.util.List;
+
 import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -14,6 +16,12 @@ public class OfferService {
 
     @Autowired
     private OfferRepoImpl repo;
+
+
+
+    public List<Offer> getAll(){
+        return repo.getAll();
+    }
 
 
     public void update(Offer offer, int userId) {

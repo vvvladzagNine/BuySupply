@@ -19,6 +19,11 @@ public class OfferRepoImpl implements OfferRepo {
     private UserJpaRepo userRepo;
 
     @Override
+    public List<Offer> getAll() {
+        return repo.findAll();
+    }
+
+    @Override
     public Offer save(Offer offer, int offererId) {
         if (!offer.isNew() && get(offer.getId()) == null) {
             return null;

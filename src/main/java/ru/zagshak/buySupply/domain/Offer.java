@@ -29,15 +29,6 @@ public class Offer extends AbstractBaseEntity {
     @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
 
-
-
-    @CollectionTable(name = "offer_categories", joinColumns = @JoinColumn(name = "offer_id"))
-    @Column(name = "category")
-    @ElementCollection(fetch = FetchType.EAGER)
-    @BatchSize(size = 200)
-    private Set<String> categories;
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -52,6 +43,22 @@ public class Offer extends AbstractBaseEntity {
         this.cost = cost;
         this.offerer = offerer;
         this.dateTime = dateTime;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public boolean isBuyOffer() {

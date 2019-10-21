@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface OfferRepo {
 
+
+    List<Offer> getAll();
+
     Offer save(Offer estimate, int offererId);
 
     // false if not found
