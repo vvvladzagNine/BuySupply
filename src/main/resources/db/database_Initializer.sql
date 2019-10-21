@@ -13,6 +13,8 @@ CREATE TABLE users
 (
     id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name             VARCHAR                 NOT NULL,
+    city             VARCHAR                 NOT NULL,
+    photo              VARCHAR                         ,
     email            VARCHAR                 NOT NULL,
     password         VARCHAR                 NOT NULL,
     registered       TIMESTAMP DEFAULT now() NOT NULL,

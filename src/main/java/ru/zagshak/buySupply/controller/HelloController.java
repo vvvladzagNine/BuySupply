@@ -24,4 +24,10 @@ public class HelloController {
         model.addAttribute("offers",offerService.getAll());
         return "offers";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }

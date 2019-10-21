@@ -2,6 +2,8 @@ package ru.zagshak.buySupply.domain;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -14,8 +16,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractNamedEntity {
-
+public class User extends AbstractNamedEntity implements UserDetails{
 
 
     @Column(name = "email", nullable = false, unique = true)
@@ -24,10 +25,20 @@ public class User extends AbstractNamedEntity {
     @Size(max = 100)
     private String email;
 
+
+
+    @Column(name = "photo", nullable = false)
+    private String ava;
+
+
+
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
     private String password;
+
+    @Column(name = "city", nullable = false)
+    private String city;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
@@ -62,16 +73,12 @@ public class User extends AbstractNamedEntity {
     public User() {
     }
 
-    public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRegistered(), u.getRoles());
-    }
 
-    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, true, new Date(), EnumSet.of(role, roles));
-    }
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
-        super(id, name);
+
+
+    public User( String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
+        this.name=name;
         this.email = email;
         this.password = password;
         this.enabled = enabled;
@@ -111,8 +118,62 @@ public class User extends AbstractNamedEntity {
         return roles;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isEnabled();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isEnabled();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isEnabled();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
+    public List<Estimate> getEstimates() {
+        return estimates;
+    }
+
+    public void setEstimates(List<Estimate> estimates) {
+        this.estimates = estimates;
     }
 
     public void setRoles(Collection<Role> roles) {

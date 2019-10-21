@@ -1,16 +1,15 @@
 DELETE FROM request;
 DELETE FROM estimate;
-DELETE FROM offer_categories;
 DELETE FROM offer;
 DELETE FROM category;
 DELETE FROM user_roles;
 DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO users (name, email, password) VALUES
-('UserB', 'userB@yandex.ru', 'passwordB'),
-('UserS', 'userS@yandex.ru', 'passwordS'),
-('Admin', 'admin@gmail.com', 'admin');
+INSERT INTO users (name, email, password,city) VALUES
+('UserB', 'userB@yandex.ru', 'passwordB','Moscow'),
+('UserS', 'userS@yandex.ru', 'passwordS','Moscow'),
+('Admin', 'admin@gmail.com', 'admin','Moscow');
 
 INSERT INTO user_roles (role, user_id) VALUES
 ('ROLE_USER', 100000),
@@ -27,7 +26,7 @@ INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offere
 
 
 INSERT INTO request(offer_id,requester_id,message,responced) VALUES
-(100005,100000,'Hi I would like to buy your shit',false);
+(100005,100000,'Hi, I would like to buy your shit',false);
 
 INSERT INTO estimate(estimated_id,estimator_id,comment,stars,date_time) VALUES
 (100001,100000,'It is a forgery :(',1,'2016-05-31'),
