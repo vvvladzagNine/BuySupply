@@ -7,6 +7,8 @@ import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepo;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepoImpl;
 
+import java.util.List;
+
 import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -31,5 +33,9 @@ public class RequestService {
     public void update(Request request, int offerId, int userId) {
         Assert.notNull(request, "request must not be null");
        checkNotFoundWithId(requestRepo.save(request, offerId, userId), offerId);
+    }
+
+    public List<Request> getAll(){
+        return requestRepo.getAll();
     }
 }

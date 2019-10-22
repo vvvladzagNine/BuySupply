@@ -12,8 +12,8 @@
         <style>
             body {
                 /* Цвет фона и путь к файлу */
-                color: #ff1439; /* Цвет текста */
-                background: #a7c9c1 url(/static/proekt-2.jpg)  fixed;
+                color: #000000; /* Цвет текста */
+                background: #e9edea url(/static/proekt-2.jpg)  fixed;
                 background-size: 100%;
             }
         </style>

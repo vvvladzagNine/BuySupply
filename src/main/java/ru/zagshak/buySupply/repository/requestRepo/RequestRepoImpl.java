@@ -6,6 +6,8 @@ import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 
+import java.util.List;
+
 @Repository
 public class RequestRepoImpl implements RequestRepo {
 
@@ -37,5 +39,10 @@ public class RequestRepoImpl implements RequestRepo {
     @Override
     public Request get(int id) {
         return requestRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Request> getAll() {
+        return requestRepo.findAll();
     }
 }

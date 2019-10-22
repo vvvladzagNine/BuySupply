@@ -19,67 +19,25 @@ import ru.zagshak.buySupply.service.UserService;
 public class WebSpringSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
-//
-//
-//
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                    .antMatchers("/").permitAll()
-//                    .anyRequest().authenticated()
-//                .and()
-//                    .formLogin().loginPage("/login").permitAll()
-//                .and()
-//                    .rememberMe()
-//                .and()
-//                    .logout().permitAll();
-//    }
-//
-////    @Bean
-////    @Override
-////    public UserDetailsService userDetailsService() {
-////        UserDetails user =
-////                User.withDefaultPasswordEncoder()
-////                        .username("user")
-////                        .password("password")
-////                        .roles("USER")
-////                        .build();
-////
-////        return new InMemoryUserDetailsManager(user);
-////    }
-//
-////    @Autowired
-////    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-////
-////        auth.inMemoryAuthentication()
-////                .withUser("user").password("password").roles("USER")
-////                .and()
-////                .withUser("admin").password("password").roles("ADMIN");
-////    }
-//
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                    .antMatchers("/","/registration","/img/**","/static/**").permitAll()
+                    .anyRequest().authenticated()
+                .and()
+                    .formLogin().loginPage("/login").permitAll()
+                .and()
+                    .rememberMe()
+                .and()
+                    .logout().permitAll();
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
-    }
-
 
 }
