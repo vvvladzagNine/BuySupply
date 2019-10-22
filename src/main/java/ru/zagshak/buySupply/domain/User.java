@@ -188,6 +188,16 @@ public class User extends AbstractNamedEntity implements UserDetails{
         this.requests = requests;
     }
 
+
+
+    public String getAva() {
+        return ava;
+    }
+
+    public void setAva(String ava) {
+        this.ava = ava;
+    }
+
     @Override
     public String toString() {
         return "User{" +

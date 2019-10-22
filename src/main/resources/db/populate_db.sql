@@ -12,9 +12,9 @@ INSERT INTO users (name, email, password,city) VALUES
 ('Admin', 'admin@gmail.com', 'admin','Moscow');
 
 INSERT INTO user_roles (role, user_id) VALUES
-('ROLE_USER', 100000),
-('ROLE_USER', 100001),
-('ROLE_ADMIN', 100002);
+('USER', 100000),
+('USER', 100001),
+('ADMIN', 100002);
 
 INSERT INTO category (name,unit,type) VALUES
 ('Food','KG','Box'),

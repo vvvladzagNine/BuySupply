@@ -45,4 +45,9 @@ public class RequestRepoImpl implements RequestRepo {
     public List<Request> getAll() {
         return requestRepo.findAll();
     }
+
+    @Override
+    public List<Request> getAllByUser(int userId) {
+        return requestRepo.getAllByUser(userId);
+    }
 }

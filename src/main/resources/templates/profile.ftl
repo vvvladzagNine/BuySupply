@@ -22,13 +22,16 @@
                     <ul>
                         <#list estimates as est>
                             <li>
-                                <p><span style="font-weight: bold">${est.estimator.name}: </span>${est.comment}</p>
-                                ${est.stars}/5
+                                <p><span style="font-weight: bold">${est.estimator.name}: </span>${est.comment} | ${est.stars}/5</p>
+
                             </li>
                         </#list>
                     </ul>
                 </#if>
-                <a style="font-size: large" href="/profile/${user.id}/requests">Запросы</a>
+                <#if isHome>
+                    <a style="font-size: large" href="/profile/#{user.id}/requests">Запросы</a>
+                </#if>
+
             </div>
             <div class="col"></div>
         </div>

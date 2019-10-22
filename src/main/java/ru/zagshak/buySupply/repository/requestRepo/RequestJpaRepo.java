@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.zagshak.buySupply.domain.Request;
 
+import java.util.List;
+
 public interface RequestJpaRepo extends JpaRepository<Request, Integer> {
 
     @Modifying
@@ -17,5 +19,10 @@ public interface RequestJpaRepo extends JpaRepository<Request, Integer> {
     @Override
     @Transactional
     Request save(Request request);
+
+
+    @Transactional
+    @Query("SELECT r FROM Request r JOIN r.offer f WHERE f.offerer.id=:userId")
+    List<Request> getAllByUser(@Param("userId") int userId);
 
 }

@@ -12,4 +12,6 @@ public interface RequestRepo {
 
     Request get(int id);
     List<Request> getAll();
+    List<Request> getAllByUser(int userId);
+
 }

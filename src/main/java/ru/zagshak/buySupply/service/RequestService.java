@@ -38,4 +38,8 @@ public class RequestService {
     public List<Request> getAll(){
         return requestRepo.getAll();
     }
+
+    public List<Request> getAllByUser(int userId){
+        return requestRepo.getAllByUser(userId);
+    }
 }
