@@ -65,25 +65,26 @@ public class User extends AbstractNamedEntity implements UserDetails{
     private List<Estimate> estimates;
 
 
-
-
-
-
-
     public User() {
     }
 
 
-
-
-
-    public User( String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
-        this.name=name;
+    public User( Integer id,String name, String email, String password, String city, boolean enabled, Date registered, Collection<Role> roles) {
+        super(id, name);
         this.email = email;
         this.password = password;
+        this.city = city;
         this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
+    }
+
+    public User(Integer id, String name, String email, String password, String city, Role role, Role... roles) {
+        this(id, name, email, password, city, true, new Date(), EnumSet.of(role, roles));
+    }
+
+    public User(User user) {
+        this(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getCity(), user.isEnabled(), user.getRegistered(), user.getRoles());
     }
 
     public String getEmail() {
@@ -194,6 +195,7 @@ public class User extends AbstractNamedEntity implements UserDetails{
                 "id=" + id +
                 ", email=" + email +
                 ", name=" + name +
+                ", password=" + password +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 '}';

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.zagshak.buySupply.domain.User;
 import ru.zagshak.buySupply.repository.userRepo.UserRepo;
-import ru.zagshak.buySupply.util.exception.NotFoundException;
 
 import java.util.List;
 
