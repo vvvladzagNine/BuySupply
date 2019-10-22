@@ -27,4 +27,10 @@ public class Category extends AbstractNamedEntity {
         this.typeOfBantch = typeOfBantch;
         this.unit = unit;
     }
+
+    public Category(Integer id, String name, String typeOfBantch, String unit) {
+        super(id, name);
+        this.typeOfBantch = typeOfBantch;
+        this.unit = unit;
+    }
 }

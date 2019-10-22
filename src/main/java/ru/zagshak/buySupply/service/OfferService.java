@@ -6,9 +6,12 @@ import org.springframework.util.Assert;
 import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.repository.offerRepo.OfferRepoImpl;
+import ru.zagshak.buySupply.util.exception.NoAccessException;
+import ru.zagshak.buySupply.util.exception.NotFoundException;
 
 import java.util.List;
 
+import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithAccess;
 import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -24,9 +27,14 @@ public class OfferService {
     }
 
 
-    public void update(Offer offer, int userId) {
+    public void update(Offer offer, int userId) throws NotFoundException, NoAccessException {
         Assert.notNull(offer, "offer must not be null");
-        checkNotFoundWithId(repo.save(offer, userId), offer.getId());
+        if (offer.getOfferer().getId() != userId) {
+            throw new NoAccessException(userId + "doesn't have rights for this object/operation");
+        }
+
+//        checkNotFoundWithId(repo.save(offer, userId), offer.getId());
+        checkNotFoundWithAccess(repo.save(offer, userId),offer.getId(), offer.getOfferer().getId(), userId);
     }
 
     public Offer create(Offer offer, int userId) {
@@ -35,12 +43,14 @@ public class OfferService {
     }
 
 
-    public boolean delete(int id, int userId) {
-        return repo.delete(id,userId);
+    public void delete(int id, int userId) throws NotFoundException, NoAccessException {
+        checkNotFoundWithId(repo.get(id),id);
+        int offererId = repo.get(id).getOfferer().getId();
+        checkNotFoundWithAccess(repo.delete(id,userId), id, offererId,userId);
     }
 
 
-    public Offer get(int id) {
-        return repo.get(id);
+    public Offer get(int id) throws NotFoundException {
+        return checkNotFoundWithId(repo.get(id), id);
     }
 }

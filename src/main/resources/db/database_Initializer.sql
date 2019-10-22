@@ -58,7 +58,6 @@ CREATE TABLE offer
 CREATE TABLE request
 (
     id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-
     responced        BOOLEAN NOT NULL DEFAULT false,
     message          VARCHAR NOT NULL,
     offer_id         INTEGER NOT NULL,

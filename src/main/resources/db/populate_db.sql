@@ -21,8 +21,8 @@ INSERT INTO category (name,unit,type) VALUES
 ('CLOTHES','Thing','Pack')
                                             ;
 INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offerer_id) VALUES
-(300,100,'Pizza',false,100003,'2015-05-31',100001),
-(100,40,'Cake',true,100003,'2015-05-30',100000);
+(300,100,'Pizza',false,100003,'2015-05-31 10:00:00',100001),
+(100,40,'Cake',true,100003,'2015-05-30 10:00:00',100000);
 
 
 INSERT INTO request(offer_id,requester_id,message,responced) VALUES

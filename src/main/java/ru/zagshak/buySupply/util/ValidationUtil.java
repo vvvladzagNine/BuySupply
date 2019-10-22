@@ -2,6 +2,7 @@ package ru.zagshak.buySupply.util;
 
 import ru.zagshak.buySupply.HasId;
 import ru.zagshak.buySupply.util.exception.IllegalRequestDataException;
+import ru.zagshak.buySupply.util.exception.NoAccessException;
 import ru.zagshak.buySupply.util.exception.NotFoundException;
 
 public class ValidationUtil {
@@ -32,5 +33,12 @@ public class ValidationUtil {
         if (!bean.isNew()) {
             throw new IllegalRequestDataException(bean + " must be new (id=null)");
         }
+    }
+
+    public static <T> T checkNotFoundWithAccess(T object, int id, int objectsUserId, int userId) {
+        if (objectsUserId != userId) {
+            throw new NoAccessException(objectsUserId + " doesn't have rights for this object/operation");
+        }
+        return checkNotFoundWithId(object, id);
     }
 }
