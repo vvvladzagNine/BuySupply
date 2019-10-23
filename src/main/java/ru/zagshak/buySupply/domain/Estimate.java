@@ -27,6 +27,28 @@ public class Estimate extends AbstractBaseEntity {
     public Estimate() {
     }
 
+    public Estimate(Integer id, User estimator, User estimated,  int stars, String comment, LocalDateTime dateTime) {
+        super(id);
+        this.estimator = estimator;
+        this.estimated = estimated;
+        this.stars = stars;
+        this.comment = comment;
+        this.dateTime = dateTime;
+    }
+
+    public Estimate(Integer id, int stars, String comment, LocalDateTime dateTime) {
+        super(id);
+        this.stars = stars;
+        this.comment = comment;
+        this.dateTime = dateTime;
+    }
+
+    public Estimate(Estimate e) {
+        this(e.getId(), e.getEstimator(), e.getEstimated(), e.getStars(), e.getComment(), e.getDateTime());
+    }
+
+
+
     public String getComment() {
         return comment;
     }
@@ -58,4 +80,9 @@ public class Estimate extends AbstractBaseEntity {
     public void setEstimator(User estimator) {
         this.estimator = estimator;
     }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
 }

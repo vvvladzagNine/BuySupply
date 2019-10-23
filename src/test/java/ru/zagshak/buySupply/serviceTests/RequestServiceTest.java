@@ -1,4 +1,4 @@
-package ru.zagshak.buySupply;
+package ru.zagshak.buySupply.serviceTests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

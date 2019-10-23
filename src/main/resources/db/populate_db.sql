@@ -31,5 +31,5 @@ INSERT INTO request(offer_id,requester_id,message,responced) VALUES
 (100006,100000,'Ma fat boy wants some cakes and cocks', false);
 
 INSERT INTO estimate(estimated_id,estimator_id,comment,stars,date_time) VALUES
-(100001,100000,'It is a forgery :(',1,'2016-05-31'),
-(100000,100001,'Offer then reject !!!',1,'2016-05-31');
+(100001,100000,'It is a forgery :(',1,'2016-05-31  10:00:00'),
+(100000,100001,'Offer then reject !!!',1,'2016-05-31  10:00:00');
