@@ -38,6 +38,11 @@ public class EstimateRepoImpl implements EstimateRepo {
     }
 
     @Override
+    public List<Estimate> getAll() {
+        return repo.findAll();
+    }
+
+    @Override
     public List<Estimate> getAllByEstimator(int estimatorId) {
         return repo.getAllByEstimatorId(estimatorId);
     }

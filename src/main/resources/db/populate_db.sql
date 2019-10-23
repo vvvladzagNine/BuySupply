@@ -12,21 +12,23 @@ INSERT INTO users (name, email, password,city) VALUES
 ('Admin', 'admin@gmail.com', 'admin','Moscow');
 
 INSERT INTO user_roles (role, user_id) VALUES
-('USER', 100000),
-('USER', 100001),
-('ADMIN', 100002);
+('ROLE_USER', 100000),
+('ROLE_USER', 100001),
+('ROLE_ADMIN', 100002);
 
 INSERT INTO category (name,unit,type) VALUES
 ('Food','KG','Box'),
 ('CLOTHES','Thing','Pack')
                                             ;
 INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offerer_id) VALUES
-(300,100,'Pizza',false,100003,'2015-05-31',100001),
-(100,40,'Cake',true,100003,'2015-05-30',100000);
+(300,100,'Pizza',false,100003,'2015-05-31 10:00:00',100001),
+(100,40,'Cake',true,100003,'2015-05-30 10:00:00',100000);
 
 INSERT INTO request(offer_id,requester_id,message,responced) VALUES
-(100005,100000,'Hi, I would like to buy your shit',false);
+(100005,100000,'Hi, I would like to buy your shit',false),
+(100005,100001,'Man, this offer is so cool, i even shitted myself when i saw the price', false),
+(100006,100000,'Ma fat boy wants some cakes and cocks', false);
 
 INSERT INTO estimate(estimated_id,estimator_id,comment,stars,date_time) VALUES
-(100001,100000,'It is a forgery :(',1,'2016-05-31'),
-(100000,100001,'Offer then reject !!!',1,'2016-05-31');
+(100001,100000,'It is a forgery :(',1,'2016-05-31  10:00:00'),
+(100000,100001,'Offer then reject !!!',1,'2016-05-31  10:00:00');

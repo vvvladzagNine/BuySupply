@@ -13,6 +13,8 @@ public interface EstimateRepo {
     // null if not found
     Estimate get(int id);
 
+    List<Estimate> getAll();
+
     List<Estimate> getAllByEstimator(int estimatorId);
     List<Estimate> getAllByEstimated(int estimatedId);
 
