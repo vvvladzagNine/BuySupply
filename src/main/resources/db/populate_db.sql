@@ -24,7 +24,6 @@ INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offere
 (300,100,'Pizza',false,100003,'2015-05-31',100001),
 (100,40,'Cake',true,100003,'2015-05-30',100000);
 
-
 INSERT INTO request(offer_id,requester_id,message,responced) VALUES
 (100005,100000,'Hi, I would like to buy your shit',false);
 

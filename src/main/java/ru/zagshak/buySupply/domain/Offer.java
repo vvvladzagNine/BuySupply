@@ -1,10 +1,10 @@
 package ru.zagshak.buySupply.domain;
 
-import org.hibernate.annotations.BatchSize;
+import ru.zagshak.buySupply.domain.to.OfferTO.OfferTO;
+import ru.zagshak.buySupply.domain.to.OfferTO.OfferTOSave;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 public class Offer extends AbstractBaseEntity {
@@ -35,6 +35,14 @@ public class Offer extends AbstractBaseEntity {
 
 
     public Offer() {
+    }
+
+    public Offer(OfferTOSave to){
+        this.buyOffer = to.isBuyOffer();
+        this.description = to.getDescription();
+        this.cost = to.getCost();
+        this.dateTime = to.getDateTime();
+        this.amount = to.getAmount();
     }
 
     public Offer(Boolean buyOffer, String description, Integer cost, User offerer, LocalDateTime dateTime) {

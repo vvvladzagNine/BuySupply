@@ -47,6 +47,7 @@ public class User extends AbstractNamedEntity implements UserDetails{
     @NotNull
     private Date registered = new Date();
 
+
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")

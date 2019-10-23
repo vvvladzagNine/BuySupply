@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
+import ru.zagshak.buySupply.repository.CategoryJPARepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 
 import java.util.List;
@@ -18,17 +19,21 @@ public class OfferRepoImpl implements OfferRepo {
     @Autowired
     private UserJpaRepo userRepo;
 
+    @Autowired
+    private CategoryJPARepo categoryRepo;
+
     @Override
     public List<Offer> getAll() {
         return repo.findAll();
     }
 
     @Override
-    public Offer save(Offer offer, int offererId) {
+    public Offer save(Offer offer, int offererId,int categoryId) {
         if (!offer.isNew() && get(offer.getId()) == null) {
             return null;
         }
         offer.setOfferer(userRepo.getOne(offererId));
+        offer.setCategory(categoryRepo.getOne(categoryId));
 
         return repo.save(offer);
     }

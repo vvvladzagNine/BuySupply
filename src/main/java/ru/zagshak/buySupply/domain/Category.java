@@ -10,7 +10,7 @@ import javax.persistence.UniqueConstraint;
 public class Category extends AbstractNamedEntity {
 
     @Column(name = "type", nullable = false)
-    private String typeOfBantch;
+    private String typeOfBatch;
 
     @Column(name = "unit", nullable = false)
     private String unit;
@@ -22,9 +22,25 @@ public class Category extends AbstractNamedEntity {
     }
 
 
-    public Category(String name, String typeOfBantch, String unit) {
+    public Category(String name, String typeOfBatch, String unit) {
         this.name=name;
-        this.typeOfBantch = typeOfBantch;
+        this.typeOfBatch = typeOfBatch;
+        this.unit = unit;
+    }
+
+    public String getTypeOfBantch() {
+        return typeOfBatch;
+    }
+
+    public void setTypeOfBantch(String typeOfBantch) {
+        this.typeOfBatch = typeOfBantch;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 }

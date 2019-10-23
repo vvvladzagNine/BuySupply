@@ -25,9 +25,5 @@ public class EstimateController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/offers")
-    public String offers(Model model){
-        model.addAttribute("offers",offerService.getAll());
-        return "offers";
-    }
+
 }

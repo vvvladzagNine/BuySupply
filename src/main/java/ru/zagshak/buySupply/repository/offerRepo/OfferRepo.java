@@ -10,7 +10,7 @@ public interface OfferRepo {
 
     List<Offer> getAll();
 
-    Offer save(Offer estimate, int offererId);
+    Offer save(Offer estimate, int offererId,int categoryId);
 
     // false if not found
     boolean delete(int id, int userId);
