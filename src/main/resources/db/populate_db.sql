@@ -26,7 +26,9 @@ INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offere
 
 
 INSERT INTO request(offer_id,requester_id,message,responced) VALUES
-(100005,100000,'Hi, I would like to buy your shit',false);
+(100005,100000,'Hi, I would like to buy your shit',false),
+(100005,100001,'Man, this offer is so cool, i even shitted myself when i saw the price', false),
+(100006,100000,'Ma fat boy wants some cakes and cocks', false);
 
 INSERT INTO estimate(estimated_id,estimator_id,comment,stars,date_time) VALUES
 (100001,100000,'It is a forgery :(',1,'2016-05-31'),

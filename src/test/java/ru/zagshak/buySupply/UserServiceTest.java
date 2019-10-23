@@ -50,8 +50,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test() throws Exception {
-        assertThat(userService).isNotNull();
+    public void delete() throws Exception {
+        userService.delete(USER1_ID);
+        assertMatch(userService.getAll(), USER2);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void deleteNotFound() {
+        userService.delete(1);
     }
 
     @Test
@@ -70,25 +76,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void delete() throws Exception {
-        userService.delete(USER1_ID);
-        assertMatch(userService.getAll(), USER2);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void deleteNotFound() {
-        userService.delete(1);
-    }
-
-    @Test
     public void getByEmail() {
         assertMatch(userService.getByEmail("admin@gmail.com"), ADMIN);
     }
-
-
-
-
-
-
 
 }

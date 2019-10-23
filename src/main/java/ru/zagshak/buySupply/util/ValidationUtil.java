@@ -35,10 +35,4 @@ public class ValidationUtil {
         }
     }
 
-    public static <T> T checkNotFoundWithAccess(T object, int id, int objectsUserId, int userId) {
-        if (objectsUserId != userId) {
-            throw new NoAccessException(objectsUserId + " doesn't have rights for this object/operation");
-        }
-        return checkNotFoundWithId(object, id);
-    }
 }

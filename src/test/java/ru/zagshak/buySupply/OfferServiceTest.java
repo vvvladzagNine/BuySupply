@@ -50,6 +50,17 @@ public class OfferServiceTest {
     }
 
     @Test
+    public void delete() throws Exception {
+        offerService.delete(OFFER2_ID, OFFER2.getOfferer().getId());
+        assertMatch(offerService.getAll(), OFFER1);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void deleteNotFound() throws Exception {
+        offerService.delete(1,5);
+    }
+
+    @Test
     public void get() throws Exception {
         assertMatch(offerService.get(OFFER1_ID),OFFER1);
     }
@@ -63,20 +74,5 @@ public class OfferServiceTest {
     public void getAll() throws Exception {
         assertMatch(offerService.getAll(), OFFER1, OFFER2);
     }
-
-    @Test
-    public void delete() throws Exception {
-        offerService.delete(OFFER2_ID, OFFER2.getOfferer().getId());
-        assertMatch(offerService.getAll(), OFFER1);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void deleteNotFound() throws Exception {
-        offerService.delete(1,5);
-    }
-
-
-
-
 
 }

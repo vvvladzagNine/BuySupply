@@ -30,12 +30,22 @@ public class Request extends AbstractBaseEntity {
     public Request() {
     }
 
-    public Request(Integer id, @NotNull boolean responced, String message, Offer offer, User requester) {
+    public Request(Integer id, User requester,  Offer offer, String message, boolean responced) {
         super(id);
         this.responced = responced;
         this.message = message;
         this.offer = offer;
         this.requester = requester;
+    }
+
+    public Request(Integer id, String message, boolean responced) {
+        super(id);
+        this.responced = responced;
+        this.message = message;
+    }
+
+    public Request(Request request) {
+        this(request.getId(), request.getRequester(), request.getOffer(), request.getMessage(), request.isResponced());
     }
 
     public boolean isResponced() {
@@ -50,7 +60,7 @@ public class Request extends AbstractBaseEntity {
         return message;
     }
 
-    public void setMessage(Integer amount) {
+    public void setMessage(String message) {
         this.message = message;
     }
 

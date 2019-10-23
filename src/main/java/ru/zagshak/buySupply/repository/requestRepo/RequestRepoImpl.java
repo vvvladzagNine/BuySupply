@@ -23,7 +23,7 @@ public class RequestRepoImpl implements RequestRepo {
 
     @Override
     public Request save(Request request, int offerId, int userId) {
-        if (!request.isNew() && get(request.getId()) == null ) {
+        if (!request.isNew() && get(request.getId(), userId) == null ) {
             return null;
         }
         request.setOffer(offerRepo.getOne(offerId));
@@ -34,6 +34,12 @@ public class RequestRepoImpl implements RequestRepo {
     @Override
     public boolean delete(int id, int userId) {
         return requestRepo.delete(id, userId) != 0;
+    }
+
+
+    @Override
+    public Request get(int id, int userId) {
+        return requestRepo.findById(id).filter(request -> request.getRequester().getId() == userId).orElse(null);
     }
 
     @Override
