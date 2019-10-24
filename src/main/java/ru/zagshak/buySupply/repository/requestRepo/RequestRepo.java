@@ -10,7 +10,10 @@ public interface RequestRepo {
 
     boolean delete(int id, int userId);
 
+    Request get(int id, int userId);
+
     Request get(int id);
+
     List<Request> getAll();
     List<Request> getAllByUser(int userId);
 

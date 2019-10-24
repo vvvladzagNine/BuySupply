@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class OfferTOSave {
 
+    private Integer id;
 
     private boolean buyOffer;
 
@@ -47,6 +48,14 @@ public class OfferTOSave {
         this.offererId = o.getOfferer().getId();
         this.dateTime = o.getDateTime();
         this.categoryId = o.getCategory().getId();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public boolean isBuyOffer() {

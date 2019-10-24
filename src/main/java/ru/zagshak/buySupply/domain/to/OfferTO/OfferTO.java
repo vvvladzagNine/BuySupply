@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class OfferTO {
 
 
+    private int id;
     private boolean buyOffer;
 
     private String description;
@@ -31,7 +32,8 @@ public class OfferTO {
 
 
 
-    public OfferTO(boolean buyOffer, String description, int amount, int cost, String offererName, int offererId, LocalDateTime dateTime, Category category) {
+    public OfferTO(int id,boolean buyOffer, String description, int amount, int cost, String offererName, int offererId, LocalDateTime dateTime, Category category) {
+        this.id=id;
         this.buyOffer = buyOffer;
         this.description = description;
         this.amount = amount;
@@ -44,6 +46,7 @@ public class OfferTO {
 
 
     public OfferTO(Offer o) {
+        this.id=o.getId();
         this.buyOffer = o.isBuyOffer();
         this.description = o.getDescription();
         this.amount = o.getAmount();
@@ -52,6 +55,14 @@ public class OfferTO {
         this.offererId = o.getOfferer().getId();
         this.dateTime = o.getDateTime();
         this.category = o.getCategory();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isBuyOffer() {

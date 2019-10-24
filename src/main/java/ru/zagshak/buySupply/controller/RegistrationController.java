@@ -36,7 +36,7 @@ public class RegistrationController {
         u.setEmail(email);
         u.setCity(city);
         u.setName(username);
-        u.setRoles(Collections.singleton(Role.USER));
+        u.setRoles(Collections.singleton(Role.ROLE_USER));
 
         userService.create(u);
         return "registration";

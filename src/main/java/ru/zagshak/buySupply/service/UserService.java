@@ -35,12 +35,12 @@ public class UserService implements UserDetailsService {
         checkNotFoundWithId(userRepo.delete(id), id);
     }
 
-    public User get(int id) /*throws NotFoundException*/ {
+    public User get(int id) throws NotFoundException {
         return checkNotFoundWithId(userRepo.get(id),id);
 
     }
 
-    public User getByEmail(String email) /*throws NotFoundException*/ {
+    public User getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(userRepo.getByEmail(email),"email = " + email);
     }

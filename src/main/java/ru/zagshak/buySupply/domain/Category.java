@@ -28,12 +28,12 @@ public class Category extends AbstractNamedEntity {
         this.unit = unit;
     }
 
-    public String getTypeOfBantch() {
+    public String getTypeOfBatch() {
         return typeOfBatch;
     }
 
-    public void setTypeOfBantch(String typeOfBantch) {
-        this.typeOfBatch = typeOfBantch;
+    public void setTypeOfBatch(String typeOfBatch) {
+        this.typeOfBatch = typeOfBatch;
     }
 
     public String getUnit() {
@@ -41,6 +41,12 @@ public class Category extends AbstractNamedEntity {
     }
 
     public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Category(Integer id, String name, String typeOfBantch, String unit) {
+        super(id, name);
+        this.typeOfBatch = typeOfBantch;
         this.unit = unit;
     }
 }

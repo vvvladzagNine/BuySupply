@@ -37,7 +37,17 @@ public class Offer extends AbstractBaseEntity {
     public Offer() {
     }
 
+
     public Offer(OfferTOSave to){
+        this.buyOffer = to.isBuyOffer();
+        this.description = to.getDescription();
+        this.cost = to.getCost();
+        this.dateTime = to.getDateTime();
+        this.amount = to.getAmount();
+    }
+
+    public Offer(OfferTOSave to, Integer id){
+        this.id=id;
         this.buyOffer = to.isBuyOffer();
         this.description = to.getDescription();
         this.cost = to.getCost();
@@ -48,9 +58,40 @@ public class Offer extends AbstractBaseEntity {
     public Offer(Boolean buyOffer, String description, Integer cost, User offerer, LocalDateTime dateTime) {
         this.buyOffer = buyOffer;
         this.description = description;
+        this.amount = amount;
         this.cost = cost;
+        this.buyOffer = buyOffer;
+        this.category = category;
         this.offerer = offerer;
         this.dateTime = dateTime;
+
+    }
+
+    public Offer(Integer id, String description,int amount, Integer cost, boolean buyOffer, Category category, User offerer,  LocalDateTime dateTime) {
+        super(id);
+        this.description = description;
+        this.amount = amount;
+        this.cost = cost;
+        this.buyOffer = buyOffer;
+        this.category = category;
+        this.offerer = offerer;
+        this.dateTime = dateTime;
+
+    }
+
+    public Offer(Integer id, String description,int amount, Integer cost, boolean buyOffer, Category category, LocalDateTime dateTime) {
+        super(id);
+        this.description = description;
+        this.amount = amount;
+        this.cost = cost;
+        this.buyOffer = buyOffer;
+        this.category = category;
+        this.dateTime = dateTime;
+
+    }
+
+    public Offer(Offer offer) {
+        this(offer.getId(), offer.getDescription(), offer.getAmount(), offer.getCost(), offer.isBuyOffer(), offer.getCategory(), offer.getOfferer(), offer.getDateTime());
     }
 
     public int getAmount() {
