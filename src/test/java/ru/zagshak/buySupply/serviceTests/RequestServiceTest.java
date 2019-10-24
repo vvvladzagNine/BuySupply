@@ -68,6 +68,11 @@ public class RequestServiceTest {
         assertMatch(requestService.get(REQUEST1_ID, USER1_ID), REQUEST1);
     }
 
+    @Test
+    public void getForOfferer() throws Exception {
+        assertMatch(requestService.getForOfferer(REQUEST1_ID, USER2_ID), REQUEST1);
+    }
+
     @Test(expected = NoAccessException.class)
     public void getNotOwn() throws NotFoundException, NoAccessException {
         assertMatch(requestService.get(REQUEST1_ID, USER2_ID), REQUEST1);
@@ -81,5 +86,20 @@ public class RequestServiceTest {
     @Test
     public void getAll() throws Exception {
         assertMatch(requestService.getAll(),REQUEST1, REQUEST2, REQUEST3);
+    }
+
+    @Test
+    public void getAllForOffer() throws Exception {
+        assertMatch(requestService.getAllForOffer(OFFER1_ID, OFFER1.getOfferer().getId()),REQUEST1, REQUEST2);
+    }
+
+    @Test
+    public void getAllForOfferer() throws Exception {
+        assertMatch(requestService.getAllForOfferer(OFFER1.getOfferer().getId()),REQUEST1, REQUEST2);
+    }
+
+    @Test
+    public void getAllForRequester() throws Exception {
+        assertMatch(requestService.getAllForRequester(REQUEST1.getRequester().getId()),REQUEST1, REQUEST3);
     }
 }

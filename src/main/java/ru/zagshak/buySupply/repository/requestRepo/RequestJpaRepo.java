@@ -20,9 +20,23 @@ public interface RequestJpaRepo extends JpaRepository<Request, Integer> {
     @Transactional
     Request save(Request request);
 
+    @Transactional
+    @Query("SELECT r FROM Request r JOIN r.offer f WHERE r.id=:id AND f.offerer.id=:offererId")
+    Request getForOfferer(@Param("id") int id, @Param("offererId") int offererId);
 
     @Transactional
-    @Query("SELECT r FROM Request r JOIN r.offer f WHERE f.offerer.id=:userId")
-    List<Request> getAllByUser(@Param("userId") int userId);
+    @Query("SELECT r FROM Request r JOIN r.offer f WHERE f.id=:offerId AND f.offerer.id=:offererId")
+    List<Request> getAllForOffer(@Param("offerId") int offerId, @Param("offererId") int offererId);
+
+
+    @Transactional
+    @Query("SELECT r FROM Request r JOIN r.offer f WHERE f.offerer.id=:offererId")
+    List<Request> getAllForOfferer(@Param("offererId") int offererId);
+
+
+    @Transactional
+    @Query("SELECT r FROM Request r WHERE r.requester.id=:requesterId")
+    List<Request> getAllForRequester(@Param("requesterId") int requesterId);
+
 
 }

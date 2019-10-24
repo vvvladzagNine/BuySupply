@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.zagshak.buySupply.domain.Request;
+import ru.zagshak.buySupply.domain.to.requestTO.RequestTO;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepo;
 import ru.zagshak.buySupply.repository.requestRepo.RequestRepoImpl;
 import ru.zagshak.buySupply.util.exception.NoAccessException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.zagshak.buySupply.util.ValidationUtil.checkNotFoundWithId;
 
@@ -18,11 +20,18 @@ public class RequestService {
     @Autowired
     private RequestRepo requestRepo;
 
+    @Autowired
+    private OfferService offerService;
+
     public Request get(int id, int userId) {
         if (get(id).getRequester().getId() != userId) {
             throw new NoAccessException("You can't access others requests");
         }
         return checkNotFoundWithId(requestRepo.get(id, userId), id);
+    }
+
+    public Request getForOfferer(int id, int offererId) {
+        return checkNotFoundWithId(requestRepo.getForOfferer(id, offererId), id);
     }
 
     public Request get(int id) {
@@ -53,7 +62,19 @@ public class RequestService {
         return requestRepo.getAll();
     }
 
-    public List<Request> getAllByUser(int userId){
-        return requestRepo.getAllByUser(userId);
+    public List<Request> getAllForOfferer(int offererId){
+        return requestRepo.getAllForOfferer(offererId);
     }
+
+    public List<Request> getAllForOffer(int offerId, int offererId) {
+        return requestRepo.getAllForOffer(offerId, offererId);
+    }
+
+    public List<Request> getAllForRequester(int requesterId){
+        return requestRepo.getAllForRequester(requesterId);
+    }
+
+
+
+
 }

@@ -43,6 +43,11 @@ public class RequestRepoImpl implements RequestRepo {
     }
 
     @Override
+    public Request getForOfferer(int id, int offererId) {
+        return requestRepo.getForOfferer(id, offererId);
+    }
+
+    @Override
     public Request get(int id) {
         return requestRepo.findById(id).orElse(null);
     }
@@ -53,7 +58,19 @@ public class RequestRepoImpl implements RequestRepo {
     }
 
     @Override
-    public List<Request> getAllByUser(int userId) {
-        return requestRepo.getAllByUser(userId);
+    public List<Request> getAllForOfferer(int offererId) {
+        return requestRepo.getAllForOfferer(offererId);
     }
+
+    @Override
+    public List<Request> getAllForRequester(int requesterId) {
+        return requestRepo.getAllForRequester(requesterId);
+    }
+
+    @Override
+    public List<Request> getAllForOffer(int offerId, int offererId) {
+        return requestRepo.getAllForOffer(offerId, offererId);
+    }
+
+
 }
