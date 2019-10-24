@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
+import ru.zagshak.buySupply.domain.to.UserTO.CurrentUserTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -66,9 +67,16 @@ public class User extends AbstractNamedEntity implements UserDetails{
     private List<Estimate> estimates;
 
 
-    public User() {
+    public User(CurrentUserTO currentUserTO) {
+        this.name=currentUserTO.getName();
+        this.email = currentUserTO.getEmail();
+        this.password = currentUserTO.getPassword();
+        this.city = currentUserTO.getCity();
     }
 
+    public User(){
+
+    }
 
     public User( Integer id,String name, String email, String password, String city, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);

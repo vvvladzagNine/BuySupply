@@ -55,6 +55,7 @@ public class WebSpringSecurity extends WebSecurityConfigurerAdapter {
                     .and()
                     .antMatcher("/rest/**")
                     .authorizeRequests()
+                    .antMatchers("/rest/sign_up").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .csrf().disable()

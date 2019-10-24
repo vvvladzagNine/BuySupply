@@ -28,7 +28,9 @@ public class OfferRestController {
 
 
     /*
-    curl --user userS@yandex.ru:passwordS  http://localhost:8080/rest/offer?pricePerUnitTo=6&pricePerUnitFrom=4&isBuyOffer=true&fragment=Piz&offererName=User&categoryName=Food
+    curl --user userS@yandex.ru:passwordS  'http://localhost:8080/rest/offer?pricePerUnitTo=6&pricePerUnitFrom=2&isBuyOffer=true&fragment=Piz&offererName=User&categoryName=Food'
+    curl --user userS@yandex.ru:passwordS  'http://localhost:8080/rest/offer'
+
      */
     @GetMapping("/rest/offer")
     public List<OfferTO> offer(
@@ -79,7 +81,9 @@ public class OfferRestController {
      */
     @DeleteMapping("rest/offer/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id,@AuthenticationPrincipal User user){
+    public void delete(
+            @PathVariable int id,
+            @AuthenticationPrincipal User user){
         offerService.delete(id,user.getId());
     }
 
@@ -89,7 +93,9 @@ public class OfferRestController {
     curl --user userS@yandex.ru:passwordS --data '{"buyOffer":false,"id":null,"description":"Wood234","amount":120,"cost":330,"offererName":"userS@yandex.ru","offererId":null,"dateTime":"2015-03-31T00:00:00","categoryId":100003}' -H "Content-Type: application/json" -X POST http://localhost:8080/rest/offer/
     */
     @PostMapping(value = "rest/offer/",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OfferTOSave saveOffer(@RequestBody OfferTOSave offerTOSave, @AuthenticationPrincipal User user){
+    public OfferTOSave saveOffer(
+            @RequestBody OfferTOSave offerTOSave,
+            @AuthenticationPrincipal User user){
         Offer f = new Offer(offerTOSave);
         checkNew(f);
         Offer created = offerService.create(f,user.getId(),offerTOSave.getCategoryId());
@@ -103,7 +109,10 @@ public class OfferRestController {
     curl --user userS@yandex.ru:passwordS --data '{"buyOffer":false,"id":100005,"description":"Rock","amount":130,"cost":430,"offererName":"userS@yandex.ru","offererId":100001,"dateTime":"2015-03-31T00:00:00","categoryId":100004}' -H "Content-Type: application/json" -X PUT http://localhost:8080/rest/offer/100005
     */
     @PutMapping(value = "rest/offer/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateOffer(@RequestBody OfferTOSave offerTOSave, @AuthenticationPrincipal User user,@PathVariable int id){
+    public void updateOffer(
+            @RequestBody OfferTOSave offerTOSave,
+                            @AuthenticationPrincipal User user,
+                            @PathVariable int id){
 
         Offer offer = new Offer(offerTOSave,offerTOSave.getId());
         assureIdConsistent(offer, id);

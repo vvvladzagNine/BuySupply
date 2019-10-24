@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.zagshak.buySupply.domain.User;
+import ru.zagshak.buySupply.domain.to.UserTO.CurrentUserTO;
 import ru.zagshak.buySupply.repository.userRepo.UserRepo;
+import ru.zagshak.buySupply.util.UserUtil;
 import ru.zagshak.buySupply.util.exception.NotFoundException;
 
 import java.util.List;
@@ -26,9 +28,9 @@ public class UserService implements UserDetailsService {
         return userRepo.save(user);
     }
 
-    public void update(User user) {
+    public void update(User user, CurrentUserTO userUpdate) {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(userRepo.save(user), user.getId());
+        checkNotFoundWithId(userRepo.save(UserUtil.updateFromTo(user, userUpdate)), user.getId());
     }
 
     public void delete(int id) {

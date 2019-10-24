@@ -45,7 +45,7 @@ public class UserServiceTest {
         User updated = new User(USER2);
         updated.setCity("New York");
         updated.setPassword("Normal Password");
-        userService.update(updated);
+        //userService.update(updated);
         assertMatch(userService.get(USER2_ID), updated);
     }
 

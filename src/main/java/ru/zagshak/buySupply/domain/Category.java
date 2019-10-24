@@ -15,9 +15,6 @@ public class Category extends AbstractNamedEntity {
     @Column(name = "unit", nullable = false)
     private String unit;
 
-
-
-
     public Category() {
     }
 
@@ -44,9 +41,9 @@ public class Category extends AbstractNamedEntity {
         this.unit = unit;
     }
 
-    public Category(Integer id, String name, String typeOfBantch, String unit) {
+    public Category(Integer id, String name, String typeOfBatch, String unit) {
         super(id, name);
-        this.typeOfBatch = typeOfBantch;
+        this.typeOfBatch = typeOfBatch;
         this.unit = unit;
     }
 }

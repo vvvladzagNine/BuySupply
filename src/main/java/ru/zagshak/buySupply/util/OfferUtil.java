@@ -20,12 +20,12 @@ public class OfferUtil {
     ){
         return original
                 .stream()
-                .filter( o -> categoryName==null || categoryName.equals(o.getCategory().getName()))
-                .filter( o -> isBuyOffer==null || !Boolean.logicalXor(isBuyOffer,o.isBuyOffer()))
-                .filter( o -> pricePerUnitFrom==null || (o.getCost()/o.getAmount())>=pricePerUnitFrom)
-                .filter( o -> pricePerUnitTo==null || (o.getCost()/o.getAmount())<=pricePerUnitTo)
-                .filter( o -> fragment==null || fragment.length()<=2 ||  (o.getDescription().contains(fragment)))
-                .filter( o -> offererName==null ||  (o.getOffererName().contains(offererName)))
+                .filter( f -> categoryName==null || categoryName.equals(f.getCategory().getName()))
+                .filter( i -> isBuyOffer==null || !Boolean.logicalXor(isBuyOffer,i.isBuyOffer()))
+                .filter( l -> pricePerUnitFrom==null || (l.getCost()/l.getAmount())>=pricePerUnitFrom)
+                .filter( t -> pricePerUnitTo==null || (t.getCost()/t.getAmount())<=pricePerUnitTo)
+                .filter( e -> fragment==null || fragment.length()<=2 ||  (e.getDescription().contains(fragment)))
+                .filter( r -> offererName==null ||  (r.getOffererName().contains(offererName)))
                 .collect(Collectors.toList());
     }
 }
