@@ -2,6 +2,7 @@ package ru.zagshak.buySupply.domain;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.zagshak.buySupply.domain.to.requestTO.RequestTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,6 +49,11 @@ public class Request extends AbstractBaseEntity {
         this(request.getId(), request.getRequester(), request.getOffer(), request.getMessage(), request.isResponced());
     }
 
+    public Request(RequestTO r) {
+        this.responced = r.isResponced();
+        this.message = r.getMessage();
+    }
+
     public boolean isResponced() {
         return responced;
     }
@@ -80,4 +86,13 @@ public class Request extends AbstractBaseEntity {
         this.requester = requester;
     }
 
+    @Override
+    public String toString() {
+        return "Request{" +
+                "responced=" + responced +
+                ", message='" + message + '\'' +
+                ", offer=" + offer +
+                ", requester=" + requester +
+                '}';
+    }
 }

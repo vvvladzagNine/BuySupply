@@ -76,7 +76,7 @@ public class UserController {
 
         if(!currentUser.getId().equals(user.getId()))
             return "redirect:/profile/{user}";
-        model.addAttribute("requests",requestService.getAllByUser(user.getId()));
+        model.addAttribute("requests",requestService.getAllForOfferer(user.getId()));
         return "requests";
     }
 }
