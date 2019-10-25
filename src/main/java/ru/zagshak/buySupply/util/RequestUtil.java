@@ -1,5 +1,6 @@
 package ru.zagshak.buySupply.util;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.domain.to.requestTO.RequestTO;
 
@@ -13,7 +14,21 @@ public class RequestUtil {
                 .collect(Collectors.toList());
     }
 
-    public static RequestTO makeTO(Request r) {
+    public static RequestTO makeTO( Request r) {
         return new RequestTO(r);
+    }
+
+    public static List<RequestTO> filterRequestTO(
+            List<Request> requests,
+            Boolean responced,
+            String message,
+            Integer offerId
+    ) {
+        return makeTO(requests)
+                .stream()
+                .filter(o -> responced == null || responced.equals(o.isResponced()))
+                .filter(o -> message == null || (o.getMessage().contains(message)))
+                .filter(o -> offerId == null || (offerId.equals(o.getOfferId())))
+                .collect(Collectors.toList());
     }
 }

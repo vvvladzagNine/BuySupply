@@ -17,9 +17,7 @@ import java.util.List;
 
 import static ru.zagshak.buySupply.util.ValidationUtil.checkNew;
 
-/*TODO
-   1)make normal update for requester and offerer
-   2) make get with filters like offers*/
+
 @RestController
 public class RequestRestController {
 
@@ -44,18 +42,61 @@ public class RequestRestController {
 
         /*
     curl --user userS@yandex.ru:passwordS  http://localhost:8080/rest/my_requests
+    curl --user u:p  http://localhost:8080/rest/my_requests?message=like
+
      */
     @GetMapping("/rest/my_requests")
-    public List<RequestTO> getAllForRequester(@AuthenticationPrincipal User user) {
-        return RequestUtil.makeTO(requestService.getAllForRequester(user.getId()));
+    public List<RequestTO> getAllForRequester(
+            @RequestParam(required = false) Boolean responced,
+            @RequestParam(required = false) String message,
+            @RequestParam(required = false) Integer offerId,
+            @AuthenticationPrincipal User user
+    ) {
+        if (
+                responced == null &&
+                message == null &&
+                offerId == null
+        ) {
+            return RequestUtil.makeTO(requestService.getAllForRequester(user.getId()));
+        }
+
+        else {
+            return RequestUtil.filterRequestTO(
+                    requestService.getAllForRequester(user.getId()),
+                    responced,
+                    message,
+                    offerId
+            );
+        }
+
     }
 
         /*
     curl --user userS@yandex.ru:passwordS  http://localhost:8080/rest/requests_for_me
      */
     @GetMapping("/rest/requests_for_me")
-    public List<RequestTO> getAllForOfferer(@AuthenticationPrincipal User user) {
-        return RequestUtil.makeTO(requestService.getAllForOfferer(user.getId()));
+    public List<RequestTO> getAllForOfferer(
+            @RequestParam(required = false) Boolean responced,
+            @RequestParam(required = false) String message,
+            @RequestParam(required = false) Integer offerId,
+            @AuthenticationPrincipal User user
+    ) {
+        if (
+                responced == null &&
+                        message == null &&
+                        offerId == null
+        ) {
+            return RequestUtil.makeTO(requestService.getAllForOfferer(user.getId()));
+        }
+
+        else {
+            return RequestUtil.filterRequestTO(
+                    requestService.getAllForOfferer(user.getId()),
+                    responced,
+                    message,
+                    offerId
+            );
+        }
     }
 
 
