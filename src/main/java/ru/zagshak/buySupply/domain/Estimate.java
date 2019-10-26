@@ -1,5 +1,7 @@
 package ru.zagshak.buySupply.domain;
 
+import ru.zagshak.buySupply.domain.to.estimateTO.EstimateTO;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -45,6 +47,13 @@ public class Estimate extends AbstractBaseEntity {
 
     public Estimate(Estimate e) {
         this(e.getId(), e.getEstimator(), e.getEstimated(), e.getStars(), e.getComment(), e.getDateTime());
+    }
+
+    public Estimate(EstimateTO esTo) {
+        this.id = esTo.getId();
+        this.stars = esTo.getStars();
+        this.comment = esTo.getComment();
+        this.dateTime = LocalDateTime.now();
     }
 
 

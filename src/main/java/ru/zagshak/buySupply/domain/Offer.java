@@ -58,10 +58,8 @@ public class Offer extends AbstractBaseEntity {
     public Offer(Boolean buyOffer, String description, Integer cost, User offerer, LocalDateTime dateTime) {
         this.buyOffer = buyOffer;
         this.description = description;
-        this.amount = amount;
         this.cost = cost;
         this.buyOffer = buyOffer;
-        this.category = category;
         this.offerer = offerer;
         this.dateTime = dateTime;
 

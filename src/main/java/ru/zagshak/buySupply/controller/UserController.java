@@ -45,7 +45,7 @@ public class UserController {
 
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
-        model.addAttribute("estimates",estimateService.getAllByEstimated(user.getId()));
+        model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         return "profile";
     }
 
@@ -61,7 +61,7 @@ public class UserController {
 
         model.addAttribute("isHome",true);
         model.addAttribute("user",currentUser);
-        model.addAttribute("estimates",estimateService.getAllByEstimated(currentUser.getId()));
+        model.addAttribute("estimates",estimateService.getAllForEstimated(currentUser.getId()));
         return "profile";
     }
 
