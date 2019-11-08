@@ -9,13 +9,57 @@
 
 
 
-    <div class="row">
+
+
+
+        <div class="row mb-3">
             <div class="col"></div>
             <div class="col-12">
 
+                <div>
+
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="text-primary">Description</span>
+                                </div>
+                                <div class="col">
+                                    <span class="text-dark">Cost</span>
+                                </div>
+                                <div class="col">
+                                    <span class="text-secondary">Amount in batch</span>
+                                </div>
+                                <div class="col">
+                                    <span class="text-secondary">Category</span>
+                                </div>
+                                <div class="col">
+                                    Buy or supply
+                                </div>
+                                <div class="col">
+                                    <span class="text-secondary">Date</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                    <ul/>
+
+
+            </div>
+            <div class="col"></div>
+        </div>
 
 
 
+
+
+
+    <div class="row">
+            <div class="col"></div>
+            <div class="col-12">
                 <#if offers??>
                 <ul class="list-group">
                 <#list offers as offer>
