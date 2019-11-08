@@ -22,7 +22,7 @@ public class EstimateService {
 
     public void update(Estimate estimate, int estimatedId, int estimatorId) {
         Assert.notNull(estimate, "estimate must not be null");
-        if (estimate.getEstimator().getId() != estimatorId) {
+        if (get(estimate.getId()).getEstimator().getId() != estimatorId) {
             throw new NoAccessException("You can't change others estimates");
         }
         checkNotFoundWithId(repo.save(estimate, estimatedId,estimatorId), estimate.getId());
@@ -55,7 +55,7 @@ public class EstimateService {
         return repo.getAllByEstimator(estimatorId);
     }
 
-    public List<Estimate> getAllByEstimated(int estimatedId) {
+    public List<Estimate> getAllForEstimated(int estimatedId) {
         return repo.getAllByEstimated(estimatedId);
     }
 }

@@ -78,7 +78,7 @@ public class EstimateServiceTest {
 
     @Test
     public void getAllByEstimated() throws Exception {
-        assertMatch(estimateService.getAllByEstimated(USER1_ID), ESTIMATE2);
+        assertMatch(estimateService.getAllForEstimated(USER1_ID), ESTIMATE2);
     }
 
 
