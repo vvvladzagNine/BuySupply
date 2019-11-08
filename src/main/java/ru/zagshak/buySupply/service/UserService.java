@@ -33,6 +33,11 @@ public class UserService implements UserDetailsService {
         checkNotFoundWithId(userRepo.save(UserUtil.updateFromTo(user, userUpdate)), user.getId());
     }
 
+    public void save(User user) {
+        Assert.notNull(user, "user must not be null");
+        checkNotFoundWithId(userRepo.save(user), user.getId());
+    }
+
     public void delete(int id) {
         checkNotFoundWithId(userRepo.delete(id), id);
     }
