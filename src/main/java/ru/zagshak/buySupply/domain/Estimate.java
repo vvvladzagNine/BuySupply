@@ -3,6 +3,8 @@ package ru.zagshak.buySupply.domain;
 import ru.zagshak.buySupply.domain.to.estimateTO.EstimateTO;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,6 +13,8 @@ public class Estimate extends AbstractBaseEntity {
     @Column(name = "comment", nullable = false)
     private String comment;
 
+    @Max(5)
+    @Min(1)
     @Column(name = "stars", nullable = false)
     private int stars;
 

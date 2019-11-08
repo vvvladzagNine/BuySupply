@@ -22,7 +22,7 @@
     <br/>
     <br/>
     <br class="mb-7"/>
-    
+    <#include "navbar.ftl"/>
     <div class="container mt-5">
         <#nested>
     </div>
