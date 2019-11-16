@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.User;
+import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
+import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 import ru.zagshak.buySupply.service.EstimateService;
 import ru.zagshak.buySupply.service.OfferService;
 import ru.zagshak.buySupply.service.RequestService;
@@ -19,7 +22,9 @@ import ru.zagshak.buySupply.service.UserService;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -35,6 +40,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OfferJPARepo offerJpaRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -57,6 +65,28 @@ public class UserController {
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("me",user);
+        return "profile";
+    }
+
+    @PostMapping("/profile/{user}")
+    public String profileComment(
+
+            @PathVariable User user,
+            @RequestParam String comment,
+            @RequestParam String stars,
+            Model model,
+            @AuthenticationPrincipal User currentUser
+
+    ){
+        estimateService.create(new Estimate(Integer.parseInt(stars),comment, LocalDateTime.now()),user.getId(),currentUser.getId());
+        model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
+        model.addAttribute("user",userService.get(user.getId()));
+        model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("me",user);
+
         return "profile";
     }
 
@@ -73,6 +103,8 @@ public class UserController {
         model.addAttribute("isHome",true);
         model.addAttribute("user",currentUser);
         model.addAttribute("estimates",estimateService.getAllForEstimated(currentUser.getId()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(currentUser.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("me",currentUser);
         return "profile";
     }
 

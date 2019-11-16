@@ -59,6 +59,13 @@ public class Estimate extends AbstractBaseEntity {
         this.comment = esTo.getComment();
         this.dateTime = LocalDateTime.now();
     }
+    public Estimate(int stars, String comment, LocalDateTime dt) {
+
+        this.stars = stars;
+        this.comment = comment;
+        this.dateTime = dt;
+
+    }
 
 
 

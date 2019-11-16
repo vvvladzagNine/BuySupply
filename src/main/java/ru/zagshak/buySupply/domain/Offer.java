@@ -45,6 +45,13 @@ public class Offer extends AbstractBaseEntity {
         this.dateTime = to.getDateTime();
         this.amount = to.getAmount();
     }
+    public Offer(boolean buyOffer,String description, int cost, LocalDateTime dt, int amount){
+        this.buyOffer = buyOffer;
+        this.description = description;
+        this.cost = cost;
+        this.dateTime = dt;
+        this.amount = amount;
+    }
 
     public Offer(OfferTOSave to, Integer id){
         this.id=id;

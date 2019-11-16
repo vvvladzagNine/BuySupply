@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/offers">Offers</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/offers/create">Create Offer</a>
+                </li>
         </ul>
 
     </div>

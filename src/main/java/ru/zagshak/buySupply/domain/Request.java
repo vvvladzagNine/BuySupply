@@ -39,6 +39,12 @@ public class Request extends AbstractBaseEntity {
         this.requester = requester;
     }
 
+    public Request(String message) {
+
+        this.responced = false;
+        this.message = message;
+    }
+
     public Request(Integer id, String message, boolean responced) {
         super(id);
         this.responced = responced;
