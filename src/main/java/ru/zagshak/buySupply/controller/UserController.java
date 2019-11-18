@@ -67,7 +67,7 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
-        return "profile";
+        return "andrewProfile";
     }
 
     @PostMapping("/profile/{user}")
@@ -87,7 +87,7 @@ public class UserController {
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
 
-        return "profile";
+        return "andrewProfile";
     }
 
 
@@ -105,7 +105,7 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(currentUser.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(currentUser.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",currentUser);
-        return "profile";
+        return "andrewProfile";
     }
 
     @GetMapping("/edit_profile/")
@@ -158,7 +158,7 @@ public class UserController {
         if(!currentUser.getId().equals(user.getId()))
             return "redirect:/profile/{user}";
         model.addAttribute("requests",requestService.getAllForOfferer(user.getId()));
-        return "requests";
+        return "andrewRequests";
     }
 
 

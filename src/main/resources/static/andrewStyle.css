@@ -1,0 +1,180 @@
+
+/* Header*/
+.header {
+    background-color: #83a3d4;
+    background-image: url("header-background.jpg");
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    border-bottom: 5px solid grey;
+}
+
+.header > div {
+    padding: 10px;
+}
+
+.header-logo {
+}
+
+
+
+.logo-img {
+    height: 80px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#enter_button {
+    margin-right: 5px;
+}
+
+
+.search-feild {
+    vertical-align: middle;
+    padding: 0;
+    margin: 20px;
+}
+
+
+
+
+/* Main */
+
+.main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* Main Menu*/
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    border-right: 5px solid grey;
+    flex-grow: 1;
+}
+
+.menu-1 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.menu-2 {
+    border-top: 2px solid grey;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-button {
+    padding: 5px;
+    padding-left: 0;
+    color: black;
+    padding: 14px 25px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5%;
+}
+
+.menu-button:hover {
+    background-color: #C0C0C0;
+    text-decoration: none;
+    color: black;
+}
+
+.menu-button:active {
+    background-color: rgba(13, 13, 15, 0.86);
+    color: white;
+}
+
+.menu-button:nth-child(1) {
+    margin-top: 15px;
+}
+
+
+.menu-botton:hover {
+    background-color: rgb(192, 192, 192);
+}
+
+
+/*Main-panel*/
+.main-panel {
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+}
+
+.personal-info {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 3px solid grey;
+}
+
+.personal-photo {
+    padding: 5px;
+    flex-grow: 1;
+}
+
+.personal-photo img {
+    height: 250px;
+    width: 250px;
+    display: block;
+
+}
+
+.personal-info h2{
+    margin-top: 10px;
+    vertical-align: center;
+}
+
+.name-mail p {
+    font-size: 20px;
+}
+
+.name-mail {
+    flex-grow: 3;
+}
+
+.personal-info>.info {
+    text-align: left;
+    vertical-align: middle;
+    flex-grow: 1;
+}
+
+.info p {
+    margin-top: 20px;
+}
+
+.offers {
+    height: 200px;
+    width: 100%;
+}
+
+.estimates {
+    height: 200px;
+    width: 100%;
+    background-color: #cccdcf;
+}
+
+.offerCreation {
+    padding-left: 10px;
+}
+

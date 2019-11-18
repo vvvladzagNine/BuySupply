@@ -49,7 +49,7 @@ public class OfferController {
         ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
-        return "offers";
+        return "andrewOffers";
     }
 
 
@@ -84,13 +84,13 @@ public class OfferController {
         ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
-        return "offers";
+        return "andrewOffers";
     }
 
     @GetMapping("/offers/create")
     public String offersCreate(Model model){
         model.addAttribute("categories",categoryJPARepo.findAll());
-        return "offerCreate";
+        return "andrewCreateOffer";
     }
     @GetMapping("/offers/edit/{offerId}")
     public String offersEdit(Model model, @AuthenticationPrincipal User u, @PathVariable int offerId){
@@ -98,7 +98,7 @@ public class OfferController {
         if(o.getOfferer().getId().equals(u.getId())) {
             model.addAttribute("offer", o);
             model.addAttribute("categories",categoryJPARepo.findAll());
-            return "offerCreate";
+            return "andrewCreateOffer";
         }
         else {
             return "redirect:/offers";
