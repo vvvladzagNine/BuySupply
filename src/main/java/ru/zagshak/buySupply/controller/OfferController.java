@@ -53,6 +53,9 @@ public class OfferController {
     }
 
 
+
+
+
     @GetMapping("/offer/{id}")
     public String offer(Model model, @AuthenticationPrincipal User me, @PathVariable int id){
         model.addAttribute("offer",offerService.get(id));

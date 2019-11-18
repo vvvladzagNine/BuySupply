@@ -3,7 +3,7 @@
 </div>
 
 <div class="header-buttons">
-    <button type="button" class="btn btn-primary" style="margin-right: 5px">Вход</button>
-    <button type="button" class="btn btn-primary" >Регистрация</button>
+    <a  class="btn btn-primary" href="/login">Вход</a>
+    <a  class="btn btn-primary ml-2" href="/registration" >Регистрация</a>
 
 </div>

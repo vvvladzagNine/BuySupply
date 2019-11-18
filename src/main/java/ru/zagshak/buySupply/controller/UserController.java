@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.zagshak.buySupply.domain.Estimate;
+import ru.zagshak.buySupply.domain.Offer;
+import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.domain.User;
 import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
@@ -23,6 +25,8 @@ import ru.zagshak.buySupply.service.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -108,6 +112,62 @@ public class UserController {
         return "andrewProfile";
     }
 
+    @GetMapping("/home/requests")
+    public String myRequests(
+
+
+            Model model,
+            @AuthenticationPrincipal User currentUser
+
+    ){
+
+        model.addAttribute("me",currentUser);
+        model.addAttribute("requests",requestService.getAllForOfferer(currentUser.getId()).stream().filter(o -> !o.isResponced()).collect(Collectors.toList()));
+        return "requests";
+    }
+
+
+    @GetMapping("/home/supplies")
+    public String mySupplies(Model model, @AuthenticationPrincipal User me){
+        model.addAttribute("offers",offerJpaRepo.getOfferByRequestUserSupply(me.getId()));
+        model.addAttribute("me",me);
+        return "mySupplies";
+    }
+
+    @GetMapping("/home/buys")
+    public String myBuys(Model model, @AuthenticationPrincipal User me){
+
+        model.addAttribute("offers",offerJpaRepo.getOfferByRequestUserBuy(me.getId()));
+        model.addAttribute("me",me);
+        return "mySupplies";
+    }
+
+    @PostMapping("/home/requests")
+    public String myRequests(
+
+
+            Model model,
+            @RequestParam int requestId,
+            @RequestParam String act,
+            @AuthenticationPrincipal User currentUser
+
+    ){
+
+        if(act.equals("approve")){
+            Request r = requestService.get(requestId);
+            r.setResponced(true);
+            requestService.update(r,r.getOffer().getId(),r.getRequester().getId());
+        }
+        if(act.equals("reject")){
+
+            requestService.delete(requestId,requestService.get(requestId).getRequester().getId());
+        }
+
+        model.addAttribute("me",currentUser);
+        model.addAttribute("requests",requestService.getAllForOfferer(currentUser.getId()).stream().filter(o -> !o.isResponced()).collect(Collectors.toList()));
+        return "requests";
+    }
+
     @GetMapping("/edit_profile/")
     public String editProfilePage(
             @AuthenticationPrincipal User u,
@@ -157,7 +217,7 @@ public class UserController {
 
         if(!currentUser.getId().equals(user.getId()))
             return "redirect:/profile/{user}";
-        model.addAttribute("requests",requestService.getAllForOfferer(user.getId()));
+        model.addAttribute("requests",requestService.getAllForOfferer(currentUser.getId()).stream().filter(o -> !o.isResponced()).collect(Collectors.toList()));
         return "andrewRequests";
     }
 

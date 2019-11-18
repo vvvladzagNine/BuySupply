@@ -42,7 +42,7 @@
             <div class="col"></div>
             <div class="col-8">
                 <#if offers??>
-                    <h2>Предложения</h2>
+                    <h2>Предложения от ${user.name}</h2>
                     <ul class="list-group">
                         <#list offers as offer>
 
@@ -144,12 +144,5 @@
             </div>
             <div class="col"></div>
         </div>
-
-
-
-
-
-
-
     </div class="mb-10">
 </@b.page>

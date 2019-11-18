@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.zagshak.buySupply.domain.Offer;
+import ru.zagshak.buySupply.domain.Request;
 
 import java.util.List;
 
@@ -19,4 +20,14 @@ public interface OfferJPARepo extends JpaRepository<Offer,Integer> {
 
     @Query("SELECT m FROM Offer m WHERE m.offerer.id=:id")
     List<Offer> getAllByOffereId(int id);
+
+
+
+    @Transactional
+    @Query("SELECT f FROM Request r JOIN r.offer f WHERE r.requester.id=:requesterId AND r.responced=true AND f.buyOffer=false")
+    List<Offer> getOfferByRequestUserBuy(@Param("requesterId") int requesterId);
+
+    @Transactional
+    @Query("SELECT f FROM Request r JOIN r.offer f WHERE r.requester.id=:requesterId AND r.responced=true AND f.buyOffer=true")
+    List<Offer> getOfferByRequestUserSupply(@Param("requesterId") int requesterId);
 }
