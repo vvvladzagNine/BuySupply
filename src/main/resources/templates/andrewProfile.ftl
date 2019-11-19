@@ -61,16 +61,43 @@
     </div>
 
     <div class="estimates">
+
         <#if estimates??>
             <h2>Отзывы:</h2>
-            <ul>
-                <#list estimates as est>
-                    <li>
-                        <p><span style="font-weight: bold">${est.estimator.name}: </span>${est.comment} | ${est.stars}/5</p>
 
-                    </li>
-                </#list>
-            </ul>
+<#--            <ul>-->
+<#--                <#list estimates as est>-->
+<#--                    <li>-->
+<#--                        <p><span style="font-weight: bold">${est.estimator.name}: </span>${est.comment} | ${est.stars}/5</p>-->
+
+<#--                    </li>-->
+<#--                </#list>-->
+<#--            </ul>-->
+
+            <#list estimates as est>
+            <li>
+                    <div class="estimate">
+                        <div class="estimate-header">
+
+                            <div class="estimator-info">
+                                <img src="/img/${user.ava}" class="rounded float-left estimate-image">
+                                <div class="name-rank">
+                                    <div><p>${est.estimator.name}</p></div>
+                                    <div><p>Звезды</p></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>12.09.2018</p>
+                            </div>
+                        </div>
+
+                        <div class="estimate-body">
+                            <span>${est.comment}</span>
+                        </div>
+                    </div>
+            </li>
+            </#list>
         </#if>
     </div>
 
