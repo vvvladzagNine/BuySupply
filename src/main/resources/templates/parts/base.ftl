@@ -13,7 +13,7 @@
             body {
                 /* Цвет фона и путь к файлу */
                 color: #000000; /* Цвет текста */
-                background: #e9edea url(/static/proekt-2.jpg)  fixed;
+                background: #e9edea;
                 background-size: 100%;
             }
         </style>

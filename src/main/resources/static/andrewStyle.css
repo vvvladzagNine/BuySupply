@@ -164,17 +164,71 @@
 }
 
 .offers {
-    height: 200px;
+    min-height: 200px;
+    max-height: 100%;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .estimates {
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    max-height: 100%;
     width: 100%;
     background-color: #cccdcf;
+}
+
+.estimates li {
+   list-style: none;
+}
+
+.estimate {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-height: 170px;
+    border: 2px dashed red;
+    padding: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+li:nth-child(odd)>.estimate {
+    background-color: white;
+}
+
+.estimate-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    min-height: 50px;
+
+    border: 2px dashed red;
+}
+
+.estimate-image {
+    height: 60px;
+    width: 60px;
+ }
+
+.estimator-info {
+    display: flex;
+    border: 2px dashed red;
+}
+
+.name-rank{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
 }
 
 .offerCreation {
     padding-left: 10px;
 }
+
+
 
