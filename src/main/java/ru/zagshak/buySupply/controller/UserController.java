@@ -69,7 +69,7 @@ public class UserController {
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
-        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
         return "andrewProfile";
     }
@@ -88,7 +88,7 @@ public class UserController {
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
-        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
 
         return "andrewProfile";
@@ -107,7 +107,7 @@ public class UserController {
         model.addAttribute("isHome",true);
         model.addAttribute("user",currentUser);
         model.addAttribute("estimates",estimateService.getAllForEstimated(currentUser.getId()));
-        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(currentUser.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList()));
+        model.addAttribute("offers",offerJpaRepo.getAllByOffereId(currentUser.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",currentUser);
         return "andrewProfile";
     }

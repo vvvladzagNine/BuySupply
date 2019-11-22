@@ -7,9 +7,9 @@ DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO users (name, email, password,city,photo) VALUES
-('UserB', 'u', 'p','Moscow',null),
-('UserS', 'userS@yandex.ru', 'passwordS','Moscow','7fee5ca0-5829-49dc-90ce-ef0bc5ca9c20.1a041cb132bfc1e86aa5e2a4555556c9.jpg'),
-('Admin', 'admin@gmail.com', 'admin','Moscow',null),
+('UserB', 'u', 'p','Moscow','default.jpg'),
+('UserS', 'userS@yandex.ru', 'passwordS','Moscow','userS.jpg'),
+('Admin', 'admin@gmail.com', 'admin','Moscow','default.jpg'),
 ('Райская выпечка','HBakery@mail.ru', 'password', 'Moscow', 'mason-and-rye-cake-counter.jpeg'),
 ('Цветущие цветы','BFlowers@mail.ru', 'password', 'Moscow', 'Цветущие цветы.jpg'),
 ('Поставщик проводов','TheWires@mail.ru', 'password', 'Moscow', 'Кабельщик.jpg'),
@@ -31,7 +31,7 @@ INSERT INTO category (name,unit,type) VALUES
 ('Цветы','Шт','Ящик'),
 ('Провода','М','Упаковка'),
 ('Другое','Шт','Ящик');
-
+--
 INSERT INTO offer(cost,amount,description,buy_offer,category_id,date_time,offerer_id) VALUES
 (200,50,'Хлеб',false,100007,'2014-06-25 10:00:00',100003),
 (500,75,'Торт',false,100007,'2015-08-12 10:00:00',100003),
@@ -66,8 +66,8 @@ INSERT INTO request(offer_id,requester_id,message,responced) VALUES
 
 
 (100022,100000,'Новому оффису нужны ваши интернет кабеля', false),
-(100023,100001,'Телефонных кабелей пожалуйста', false),
-(100024,100001,'Нам не хватает электропроводки', false);
+(100023,100000,'Телефонных кабелей пожалуйста', false),
+(100024,100000,'Нам не хватает электропроводки', false);
 
 
 

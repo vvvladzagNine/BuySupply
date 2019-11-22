@@ -80,7 +80,9 @@
                         <div class="estimate-header">
 
                             <div class="estimator-info">
-                                <img src="/img/${user.ava}" class="rounded float-left estimate-image">
+                                <#if est.estimator.ava??>
+                                    <img src="/img/${est.estimator.ava}" class="rounded float-left estimate-image">
+                                </#if>
                                 <div class="name-rank">
                                     <div><p>${est.estimator.name}</p></div>
                                     <div><p>Звезды</p></div>

@@ -46,7 +46,7 @@ public class OfferController {
     public String offers(Model model, @AuthenticationPrincipal User me){
         List<Offer> ofs = new ArrayList<>();
         ofs = offerService.getAll();
-        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList());
+        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
         return "andrewOffers";
@@ -84,7 +84,7 @@ public class OfferController {
     public String offersDelete(Model model, @AuthenticationPrincipal User me, @RequestParam int offerId){
         offerService.delete(offerId,me.getId());
         List<Offer> ofs = offerService.getAll();
-        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,8)+"...");return  o;}).collect(Collectors.toList());
+        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
         return "andrewOffers";
