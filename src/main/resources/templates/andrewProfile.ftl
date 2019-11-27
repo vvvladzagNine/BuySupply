@@ -10,6 +10,12 @@
         <div class="name-mail">
             <h2>${user.name}</h2>
             <p>${user.email}</p>
+            <#if avg??>
+                <p>${avg}</p>
+            <#else>
+                Отзывов нет
+            </#if>
+
         </div>
 
         <div class="info">

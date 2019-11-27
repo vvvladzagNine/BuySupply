@@ -70,6 +70,8 @@ public class UserController {
 
             ){
 
+        if(!estimateService.getAllForEstimated(user.getId()).isEmpty())
+            model.addAttribute("avg",estimateService.getAllForEstimated(user.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
@@ -89,6 +91,9 @@ public class UserController {
 
     ){
         estimateService.create(new Estimate(Integer.parseInt(stars),comment, LocalDateTime.now()),user.getId(),currentUser.getId());
+
+        if(!estimateService.getAllForEstimated(user.getId()).isEmpty())
+            model.addAttribute("avg",estimateService.getAllForEstimated(user.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
         model.addAttribute("user",userService.get(user.getId()));
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
@@ -109,6 +114,8 @@ public class UserController {
     ){
 
         model.addAttribute("isHome",true);
+        if(!estimateService.getAllForEstimated(currentUser.getId()).isEmpty())
+            model.addAttribute("avg",estimateService.getAllForEstimated(currentUser.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
         model.addAttribute("user",currentUser);
         model.addAttribute("estimates",estimateService.getAllForEstimated(currentUser.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(currentUser.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
