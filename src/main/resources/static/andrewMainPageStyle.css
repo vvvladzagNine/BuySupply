@@ -1,0 +1,14 @@
+.mainp-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainp-title {
+    margin: 10px auto;
+    border: 2px dashed red;
+}
+
+.mainp-text {
+    margin-top: 10px;
+    border: 2px dashed red;
+}

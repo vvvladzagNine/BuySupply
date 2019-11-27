@@ -95,12 +95,20 @@
 
                             <div class="estimator-info">
                                 <#if est.estimator.ava??>
-                                    <img src="/img/${est.estimator.ava}" class="rounded float-left estimate-image">
+                                    <a href="profile/#{est.estimator.getId()}">
+                                        <img src="/img/${est.estimator.ava}" class="rounded float-left estimate-image">
+                                    </a>
                                 </#if>
-                                <div class="name-rank">
-                                    <div><p>${est.estimator.name}</p></div>
-                                    <div><p>Звезды</p></div>
-                                </div>
+                                    <div class="name-rank">
+                                        <div><p><a href="profile/#{est.estimator.getId()}">${est.estimator.name}</a></p></div>
+                                        <div>
+                                            <#if (est.stars >= 1)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
+                                            <#if (est.stars >= 2)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
+                                            <#if (est.stars >= 3)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
+                                            <#if (est.stars >= 4)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
+                                            <#if (est.stars == 5)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
+                                        </div>
+                                    </div>
                             </div>
 
                             <div>
@@ -114,6 +122,44 @@
                     </div>
             </li>
             </#list>
+        </#if>
+
+
+
+        <#if isHome>
+            <div class="mb-10">
+                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>
+            </div>
+        </#if>
+
+        <#if !isHome>
+            <h4 style="margin: auto">Ваш отзыв</h4>
+            <form method="post"  class="estimate">
+                <div class="form-group">
+
+                    <label class="col-sm-4 col-form-label">Количество звезд</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="exampleFormControlSelect1" name="stars">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+
+                        </select>
+                    </div>
+
+                    <label class="col-sm-2 col-form-label mt-3">Комментарий</label>
+                    <div class="col-sm-6">
+                            <textarea rows="3" name="comment"
+                                      class="form-control">
+                            </textarea>
+                    </div>
+
+                </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <div class="col-sm-6"><input type="submit" class="btn btn-primary btn-bg" value="Save"/></div>
+            </form>
         </#if>
     </div>
 

@@ -20,7 +20,7 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String login() {
-        return "registration";
+        return "andrewRegistration";
     }
 
 
@@ -39,6 +39,6 @@ public class RegistrationController {
         u.setRoles(Collections.singleton(Role.ROLE_USER));
 
         userService.create(u);
-        return "registration";
+        return "andrewRegistration";
     }
 }

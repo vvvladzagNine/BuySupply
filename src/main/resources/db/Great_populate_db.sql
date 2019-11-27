@@ -7,10 +7,10 @@ DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO users (name, email, password,city,photo) VALUES
-('UserB', 'u', 'p','Moscow','default.jpg'),
+('UserB', 'u', 'p','Moscow','default.png'),
 ('UserS', 'userS@yandex.ru', 'passwordS','Moscow','userS.jpg'),
-('Admin', 'admin@gmail.com', 'admin','Moscow','default.jpg'),
-('Райская выпечка','HBakery@mail.ru', 'password', 'Moscow', 'mason-and-rye-cake-counter.jpeg'),
+('Admin', 'admin@gmail.com', 'admin','Moscow','default.png'),
+('Райская выпечка','HBakery@mail.ru', 'password', 'Moscow', 'пекарня.jpeg'),
 ('Цветущие цветы','BFlowers@mail.ru', 'password', 'Moscow', 'Цветущие цветы.jpg'),
 ('Поставщик проводов','TheWires@mail.ru', 'password', 'Moscow', 'Кабельщик.jpg'),
 ('Секонд Хэнд','VeslaC@mail.ru', 'password', 'Moscow', 'Секонд хэнд.jpg');

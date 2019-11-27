@@ -120,6 +120,11 @@
     flex-direction: column;
 }
 
+.logreg {
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
 .personal-info {
     display: flex;
     flex-direction: row;
@@ -190,10 +195,11 @@
     flex-direction: column;
     width: 80%;
     min-height: 170px;
-    border: 2px dashed red;
     padding: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
+
+    background-color: #C0C0C0;
 }
 
 li:nth-child(odd)>.estimate {
@@ -208,7 +214,6 @@ li:nth-child(odd)>.estimate {
 
     min-height: 50px;
 
-    border: 2px dashed red;
 }
 
 .estimate-image {
@@ -218,7 +223,10 @@ li:nth-child(odd)>.estimate {
 
 .estimator-info {
     display: flex;
-    border: 2px dashed red;
+}
+
+.checked {
+    color: orange;
 }
 
 .name-rank{

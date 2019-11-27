@@ -58,7 +58,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "andrewLogin";
     }
 
     @GetMapping("/profile/{user}")
@@ -211,7 +211,7 @@ public class UserController {
             @AuthenticationPrincipal User u,
             Model model){
         model.addAttribute("user",u);
-        return "profileEdit";
+        return "andrewProfileEdit";
     }
 
     @PostMapping("/edit_profile/")
