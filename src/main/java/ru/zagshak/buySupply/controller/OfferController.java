@@ -17,6 +17,7 @@ import ru.zagshak.buySupply.service.EstimateService;
 import ru.zagshak.buySupply.service.OfferService;
 import ru.zagshak.buySupply.service.RequestService;
 import ru.zagshak.buySupply.service.UserService;
+import ru.zagshak.buySupply.util.OfferUtil;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,12 +48,28 @@ public class OfferController {
 
 
     @GetMapping("/offers")
-    public String offers(Model model, @AuthenticationPrincipal User me){
+    public String offers(
+            Model model,
+            @AuthenticationPrincipal User me,
+            @RequestParam(required = false) String categoryName,
+            @RequestParam(required = false) String buy,
+            @RequestParam(required = false) String supply,
+            @RequestParam(required = false) Integer pricePerUnitFrom,
+            @RequestParam(required = false) Integer pricePerUnitTo,
+            @RequestParam(required = false) String fragment,
+            @RequestParam(required = false) String offererName
+    ){
+        Boolean isBuyOffer=null;
+        if(buy!=null) isBuyOffer=true;
+        if(supply!=null) isBuyOffer=false;
+        if(buy!=null && supply!=null)isBuyOffer=null;
         List<Offer> ofs = new ArrayList<>();
         ofs = offerService.getAll();
-        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList());
+        ofs= OfferUtil.filterOffer(ofs,categoryName,isBuyOffer,pricePerUnitFrom,pricePerUnitTo,fragment,offererName);
+        ofs.stream().map(o -> {if(o.getDescription().length()>10)o.setDescription(o.getDescription().substring(0,9)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
+        model.addAttribute("types",categoryJPARepo.findAll().stream().map(o->o.getName()).collect(Collectors.toList()));
         return "andrewOffers";
     }
 
@@ -92,10 +109,10 @@ public class OfferController {
     public String offersDelete(Model model, @AuthenticationPrincipal User me, @RequestParam int offerId){
         offerService.delete(offerId,me.getId());
         List<Offer> ofs = offerService.getAll();
-        ofs.stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList());
+        ofs.stream().map(o -> {if(o.getDescription().length()>10)o.setDescription(o.getDescription().substring(0,9)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
-        return "andrewOffers";
+        return "redirect:/offers";
     }
 
     @GetMapping("/offers/create")

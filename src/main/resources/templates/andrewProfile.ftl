@@ -18,6 +18,20 @@
         </div>
     </div>
 
+    <div>
+        <#if isHome>
+            <div class="mb-10">
+                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>
+            </div>
+            <div>
+                <#if user.name="Admin">
+                    <a href="/admin">Панель администратора</a>
+                </#if>
+            </div>
+
+        </#if>
+    </div>
+
     <div class="offers">
         <#if offers??>
             <h2>Предложения:</h2>
