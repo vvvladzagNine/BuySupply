@@ -18,25 +18,36 @@
                                 <div class="col-7">
                                         <p>${request.requester.name}: ${request.message}</p>
                                 </div>
-                                    <#if request.offer.offerer.getId() == me.id>
+                                    <#if !responsed??>
+                                        <#if request.offer.offerer.getId() == me.id>
+                                            <div class="col-1">
+                                                <form method="post">
+                                                    <input type="hidden" name="requestId" value="#{request.id}" />
+                                                    <input type="hidden" name="act" value="approve" />
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                                    <button class="btn btn-success ml-3" role="button">OK</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-1">
+                                                <form method="post">
+                                                    <input type="hidden" name="requestId" value="#{request.id}" />
+                                                    <input type="hidden" name="act" value="reject" />
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                                    <button class="btn btn-danger ml-3" role="button">Х</button>
+                                                </form>
+                                            </div>
+
+                                        </#if>
+                                    <#else>
                                         <div class="col-1">
                                             <form method="post">
                                                 <input type="hidden" name="requestId" value="#{request.id}" />
-                                                <input type="hidden" name="act" value="approve" />
                                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                                <button class="btn btn-success ml-3" role="button">OK</button>
+                                                <button class="btn btn-danger ml-3" role="button">Отменить</button>
                                             </form>
                                         </div>
-                                <div class="col-1">
-                                        <form method="post">
-                                            <input type="hidden" name="requestId" value="#{request.id}" />
-                                            <input type="hidden" name="act" value="reject" />
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                            <button class="btn btn-danger ml-3" role="button">Х</button>
-                                        </form>
-                                </div>
-
                                     </#if>
+
                                 </div>
                             </li>
 

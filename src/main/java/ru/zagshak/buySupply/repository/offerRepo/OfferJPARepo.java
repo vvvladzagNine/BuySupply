@@ -30,4 +30,14 @@ public interface OfferJPARepo extends JpaRepository<Offer,Integer> {
     @Transactional
     @Query("SELECT f FROM Request r JOIN r.offer f WHERE r.requester.id=:requesterId AND r.responced=true AND f.buyOffer=true")
     List<Offer> getOfferByRequestUserSupply(@Param("requesterId") int requesterId);
+
+
+    @Transactional
+    @Query("SELECT f FROM Request r LEFT JOIN r.offer f WHERE f.offerer.id=:offerrerId AND r.responced=true AND f.buyOffer=false")
+    List<Offer> getOfferMyRequestedOffersSupply(@Param("offerrerId") int offerrerId);
+
+
+    @Transactional
+    @Query("SELECT f FROM Request r LEFT JOIN r.offer f WHERE f.offerer.id=:offerrerId AND r.responced=true AND f.buyOffer=true")
+    List<Offer> getOfferMyRequestedOffersBuy(@Param("offerrerId") int offerrerId);
 }

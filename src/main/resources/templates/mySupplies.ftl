@@ -86,16 +86,6 @@
                                         <div class="col">
                                             <span class="text-secondary">${offer.dateTime.toLocalDate()}</span>
                                         </div>
-
-                                        <div class="col">
-                                            <#if offer.offerer.id==me.id>
-                                                <form method="post">
-                                                    <input type="hidden" name="offerId" value="#{offer.id}" />
-                                                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                                    <button class="btn btn-secondary ml-3" role="button">Х</button>
-                                                </form>
-                                            </#if>
-                                        </div>
                                     </div>
                                 </div>
 

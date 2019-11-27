@@ -12,6 +12,7 @@ import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.domain.User;
 import ru.zagshak.buySupply.repository.CategoryJPARepo;
+import ru.zagshak.buySupply.repository.requestRepo.RequestJpaRepo;
 import ru.zagshak.buySupply.service.EstimateService;
 import ru.zagshak.buySupply.service.OfferService;
 import ru.zagshak.buySupply.service.RequestService;
@@ -40,6 +41,9 @@ public class OfferController {
     @Autowired
     CategoryJPARepo categoryJPARepo;
 
+    @Autowired
+    RequestJpaRepo requestJpaRepo;
+
 
 
     @GetMapping("/offers")
@@ -58,8 +62,11 @@ public class OfferController {
 
     @GetMapping("/offer/{id}")
     public String offer(Model model, @AuthenticationPrincipal User me, @PathVariable int id){
-        model.addAttribute("offer",offerService.get(id));
+        Offer f =offerService.get(id);
+        model.addAttribute("offer",f);
         model.addAttribute("me",me);
+        Request r = requestJpaRepo.getForRequester(f.getId(),me.getId());
+        model.addAttribute("req",r);
         return "offer";
     }
 
@@ -69,6 +76,7 @@ public class OfferController {
             @PathVariable int id,
             @RequestParam String message){
         requestService.create(new Request(message),id,me.getId());
+
         return "requestSuccess";
     }
     @PostMapping(value = "/offer/{id}",params={})

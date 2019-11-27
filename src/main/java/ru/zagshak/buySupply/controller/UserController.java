@@ -16,6 +16,7 @@ import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.domain.User;
 import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
+import ru.zagshak.buySupply.repository.requestRepo.RequestJpaRepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
 import ru.zagshak.buySupply.service.EstimateService;
 import ru.zagshak.buySupply.service.OfferService;
@@ -47,6 +48,9 @@ public class UserController {
 
     @Autowired
     private OfferJPARepo offerJpaRepo;
+
+    @Autowired
+    private RequestJpaRepo requestJpaRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -125,19 +129,53 @@ public class UserController {
         model.addAttribute("requests",requestService.getAllForOfferer(currentUser.getId()).stream().filter(o -> !o.isResponced()).collect(Collectors.toList()));
         return "requests";
     }
+    @GetMapping("/home/requests/{offerId}")
+    public String myRequests(
+
+            @PathVariable int offerId,
+            Model model,
+            @AuthenticationPrincipal User currentUser
+
+    ){
+
+        model.addAttribute("me",currentUser);
+        model.addAttribute("requests",requestJpaRepo.getAllRequestedForOffer(offerId,currentUser.getId()));
+        model.addAttribute("responsed","responsed");
+        return "requests";
+    }
+
+    @PostMapping("/home/requests/{offerId}")
+    public String myRequestsReject(
+
+            @PathVariable int offerId,
+            Model model,
+            @RequestParam int requestId,
+            @AuthenticationPrincipal User currentUser
+
+    ){
+
+        requestService.delete(requestId,requestService.get(requestId).getRequester().getId());
+        model.addAttribute("me",currentUser);
+        model.addAttribute("requests",requestJpaRepo.getAllRequestedForOffer(offerId,currentUser.getId()));
+        model.addAttribute("responsed","responsed");
+        return "requests";
+    }
 
 
     @GetMapping("/home/supplies")
     public String mySupplies(Model model, @AuthenticationPrincipal User me){
-        model.addAttribute("offers",offerJpaRepo.getOfferByRequestUserSupply(me.getId()));
+        List<Offer> ofs =offerJpaRepo.getOfferMyRequestedOffersSupply(me.getId());
+        ofs.addAll(offerJpaRepo.getOfferByRequestUserSupply(me.getId()));
+        model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
         return "mySupplies";
     }
 
     @GetMapping("/home/buys")
     public String myBuys(Model model, @AuthenticationPrincipal User me){
-
-        model.addAttribute("offers",offerJpaRepo.getOfferByRequestUserBuy(me.getId()));
+        List<Offer> ofs =offerJpaRepo.getOfferMyRequestedOffersBuy(me.getId());
+        ofs.addAll(offerJpaRepo.getOfferByRequestUserBuy(me.getId()));
+        model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
         return "mySupplies";
     }

@@ -16,7 +16,15 @@
 
             </#if>
             </div>
-            <div class="col"></div>
+            <div class="col">
+                <#if offer.offerer.id==me.id>
+                    <form method="post">
+                        <input type="hidden" name="offerId" value="#{offer.id}" />
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                        <button class="btn btn-secondary ml-3" role="button">Х</button>
+                    </form>
+                </#if>
+            </div>
         </div>
         <ul class="list-group">
             <li class="list-group-item">Описание: ${offer.description}</li>
@@ -26,30 +34,32 @@
             <li class="list-group-item">Предлагающий: <a href="/profile/#{offer.offerer.id}">${offer.offerer.name}</a></li>
             <li class="list-group-item">Дата публикации: ${offer.dateTime.toLocalDate()}</li>
         </ul>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col"></div>
-            <div class="col-8">
+            <div class="col-12">
 
                 <#if !(offer.offerer.id==me.id)>
-                    <form method="post">
-                        <input type="hidden" name="offererId" value="#{me.id}" />
-                        <label class="col-sm-2 col-form-label mt-3">Message</label>
-                        <div class="col-sm-6">
+                    <#if !req??>
+                        <form method="post">
+                            <input type="hidden" name="offererId" value="#{me.id}" />
+                            <label class="col-sm-2 col-form-label mt-3">Message</label>
+                            <div class="col-sm-6 mb-2">
                             <textarea rows="3" name="message"
                                       class="form-control">
                             </textarea>
-                        </div>
-                        <input type="hidden" name="offerId" value="#{offer.id}" />
-                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <button class="btn btn-secondary ml-3" role="button">Откликнуться</button>
-                    </form>
+                            </div>
+                            <input type="hidden" name="offerId" value="#{offer.id}" />
+                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                            <button class="btn btn-secondary ml-3" role="button">Откликнуться</button>
+                        </form>
+                    <#else>
+                        <h3 class="alert alert-success">Вы уже отправили запрос на это <a href="/request/#{req.id}"> предложение</a> </h3>
+                    </#if>
+
                 <#else>
-                    <form method="post">
-                        <input type="hidden" name="offerId" value="#{offer.id}" />
-                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <button class="btn btn-secondary ml-3" role="button">Х</button>
-                    </form>
+                    <a href="/home/requests/#{offer.id}" class="btn btn-primary">Принятые запросы на это предложение</a>
                 </#if>
+
             </div>
             <div class="col"></div>
         </div>
