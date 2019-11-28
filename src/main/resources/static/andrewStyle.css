@@ -66,6 +66,7 @@
     flex-direction: column;
     border-right: 5px solid grey;
     flex-grow: 1;
+    width: 250px;
 }
 
 .menu-1 {
@@ -203,7 +204,7 @@
 }
 
 li:nth-child(odd)>.estimate {
-    background-color: white;
+    background-color: #e9edea;
 }
 
 .estimate-header {
@@ -238,6 +239,9 @@ li:nth-child(odd)>.estimate {
 .offerCreation {
     padding-left: 10px;
 }
+
+
+
 
 
 
