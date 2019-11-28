@@ -18,6 +18,11 @@
                 background: #e9edea fixed;
                 background-size: 100%;
             }
+
+            .mainp-afterfooter {
+                background-image: url("img/truck.jpg");
+                background-size: cover;
+            }
         </style>
     </head>
     <body>

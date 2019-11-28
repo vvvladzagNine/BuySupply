@@ -26,9 +26,9 @@
 
     <div>
         <#if isHome>
-            <div class="mb-10">
-                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>
-            </div>
+<#--            <div class="mb-10">-->
+<#--                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>-->
+<#--            </div>-->
             <div>
                 <#if user.name="Admin">
                     <a href="/admin">Панель администратора</a>
@@ -133,9 +133,9 @@
 
 
         <#if isHome>
-            <div class="mb-10">
-                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>
-            </div>
+<#--            <div class="mb-10">-->
+<#--                <a style="font-size: large" href="/edit_profile/">Редактировать профиль</a>-->
+<#--            </div>-->
         </#if>
 
         <#if !isHome>
