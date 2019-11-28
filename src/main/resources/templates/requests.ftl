@@ -15,11 +15,14 @@
 
                             <li>
                                 <div class="row">
-                                <div class="col-7">
-                                        <p>${request.requester.name}: ${request.message}</p>
+                                <div class="col-6">
+                                    <p><a href="/profile/#{request.requester.getId()}">${request.requester.name}</a>: ${request.message}</p>
                                 </div>
                                     <#if !responsed??>
                                         <#if request.offer.offerer.getId() == me.id>
+                                            <div class="col-3">
+                                                <a href="/offer/#{request.offer.getId()}">К предлоджению</a>
+                                            </div>
                                             <div class="col-1">
                                                 <form method="post">
                                                     <input type="hidden" name="requestId" value="#{request.id}" />

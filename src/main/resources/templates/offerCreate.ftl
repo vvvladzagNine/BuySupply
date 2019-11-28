@@ -3,19 +3,22 @@
     <h1>Создание вашего предложения</h1>
     <form method="post" >
         <div class="form-group">
-            <label class="col-sm-2 col-form-label mt-3">Buy Or Supply</label>
-            <div class="form-check mt-1 col-sm-6">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="B"<#if offer??><#if offer.buyOffer>checked</#if></#if>>
-                <label class="form-check-label" for="exampleRadios1">
-                    <i class="fas fa-cart-arrow-down "></i>
-                </label>
-            </div>
-            <div class="form-check col-sm-6">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="S" <#if offer??><#if !offer.buyOffer>checked</#if><#else >checked</#if>>
-                <label class="form-check-label" for="exampleRadios2">
-                    <i class="fas fa-store"></i>
-                </label>
-            </div>
+            <#if offer??>
+            <#else>
+                <label class="col-sm-2 col-form-label mt-3">Buy Or Supply</label>
+                <div class="form-check mt-1 col-sm-6">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="B"<#if offer??><#if offer.buyOffer>checked</#if></#if>>
+                    <label class="form-check-label" for="exampleRadios1">
+                        <i class="fas fa-cart-arrow-down "></i>
+                    </label>
+                </div>
+                <div class="form-check col-sm-6">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="S" <#if offer??><#if !offer.buyOffer>checked</#if><#else >checked</#if>>
+                    <label class="form-check-label" for="exampleRadios2">
+                        <i class="fas fa-store"></i>
+                    </label>
+                </div>
+            </#if>
             <label class="col-sm-2 col-form-label mt-3">Description</label>
             <div class="col-sm-6">
                 <input type="text" name="description" value="<#if offer??>${offer.description}</#if>"

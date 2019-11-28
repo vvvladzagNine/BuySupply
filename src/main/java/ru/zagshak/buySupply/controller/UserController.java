@@ -15,6 +15,7 @@ import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
 import ru.zagshak.buySupply.domain.User;
+import ru.zagshak.buySupply.repository.estimateRepo.EstimateJPARepo;
 import ru.zagshak.buySupply.repository.offerRepo.OfferJPARepo;
 import ru.zagshak.buySupply.repository.requestRepo.RequestJpaRepo;
 import ru.zagshak.buySupply.repository.userRepo.UserJpaRepo;
@@ -51,6 +52,9 @@ public class UserController {
 
     @Autowired
     private RequestJpaRepo requestJpaRepo;
+
+    @Autowired
+    private EstimateJPARepo estimateJPARepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -90,6 +94,10 @@ public class UserController {
             @AuthenticationPrincipal User currentUser
 
     ){
+        if(estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId())!=null){
+            Estimate est = estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId());
+            estimateService.delete(est.getId(),currentUser.getId());
+        }
         estimateService.create(new Estimate(Integer.parseInt(stars),comment, LocalDateTime.now()),user.getId(),currentUser.getId());
 
         if(!estimateService.getAllForEstimated(user.getId()).isEmpty())

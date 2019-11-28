@@ -60,6 +60,7 @@
 
                 <#else>
                     <a href="/home/requests/#{offer.id}" class="btn btn-primary">Принятые запросы на это предложение</a>
+                    <a href="/offer/edit/#{offer.id}">Редактировать</a>
                 </#if>
 
             </div>

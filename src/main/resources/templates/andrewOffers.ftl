@@ -70,7 +70,7 @@
         <div class="row mt-3 mb-3">
 
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <div class="col"><input type="submit" class="btn btn-dark btn-lg btn-block" value="Find"/></div>
+            <div class="col"><input type="submit" class="btn btn-dark btn-lg btn-block" value="Поиск"/></div>
 
         </div>
         <div class="row"></div>

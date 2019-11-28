@@ -25,4 +25,8 @@ public interface EstimateJPARepo extends JpaRepository<Estimate,Integer> {
     @Query("SELECT m FROM Estimate m WHERE m.estimated.id=:estimatedId")
     List<Estimate> getAllByEstimatedId(@Param("estimatedId") int estimatedId);
 
+    @Transactional
+    @Query("SELECT m FROM Estimate m WHERE m.estimated.id=:estimatedId AND m.estimator.id=:estimatorId")
+    Estimate getAllByEstimatedIdAndEstimatorId(@Param("estimatedId") int estimatedId,@Param("estimatorId") int estimatorId);
+
 }

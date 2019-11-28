@@ -87,6 +87,8 @@ public class OfferController {
         return "offer";
     }
 
+
+
     @PostMapping(value = "/offer/{id}",params={"message"})
     public String makeRequest(
             @AuthenticationPrincipal User me,
@@ -120,9 +122,34 @@ public class OfferController {
         model.addAttribute("categories",categoryJPARepo.findAll());
         return "andrewCreateOffer";
     }
-    @GetMapping("/offers/edit/{offerId}")
-    public String offersEdit(Model model, @AuthenticationPrincipal User u, @PathVariable int offerId){
-        Offer o  = offerService.get(offerId);
+
+
+
+    @PostMapping("/offer/edit/{id}")
+    public String offersEditPost(
+            Model model,
+            @PathVariable int id,
+            @RequestParam("description") String description,
+            @RequestParam("cost") String cost,
+            @RequestParam("amount")String amount,
+            @RequestParam("category") String category
+    ){
+        Offer o = offerService.get(id);
+        o.setDescription(description);
+        o.setCategory(categoryJPARepo.findByName(category));
+        o.setAmount(Integer.parseInt(amount));
+        o.setCost(Integer.parseInt(cost));
+        offerService.update(o,o.getOfferer().getId(),o.getCategory().getId());
+
+        return "redirect:/offer/"+id;
+    }
+    @GetMapping("/offer/edit/{id}")
+    public String offersEdit(
+            Model model,
+            @AuthenticationPrincipal User u,
+            @PathVariable int id
+    ){
+        Offer o  = offerService.get(id);
         if(o.getOfferer().getId().equals(u.getId())) {
             model.addAttribute("offer", o);
             model.addAttribute("categories",categoryJPARepo.findAll());
