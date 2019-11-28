@@ -54,5 +54,8 @@ public interface RequestJpaRepo extends JpaRepository<Request, Integer> {
     @Query("SELECT r FROM Request r WHERE r.requester.id=:requesterId")
     List<Request> getAllForRequester(@Param("requesterId") int requesterId);
 
+    @Transactional
+    @Query("SELECT r FROM Request r WHERE r.requester.id=:requesterId AND r.offer.offerer.id=:offererId AND r.responced=true")
+    List<Request> getToCheckEstimating(@Param("requesterId") int requesterId,@Param("offererId") int offererId);
 
 }

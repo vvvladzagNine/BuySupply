@@ -74,6 +74,7 @@ public class UserController {
 
             ){
 
+
         if(!estimateService.getAllForEstimated(user.getId()).isEmpty())
             model.addAttribute("avg",estimateService.getAllForEstimated(user.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
         model.addAttribute("isHome",currentUser.getId().equals(user.getId()));
@@ -81,6 +82,7 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
+        model.addAttribute("estAv",!requestJpaRepo.getToCheckEstimating(currentUser.getId(),user.getId()).isEmpty());
         return "andrewProfile";
     }
 
@@ -107,8 +109,10 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
+        model.addAttribute("estAv",!requestJpaRepo.getToCheckEstimating(currentUser.getId(),user.getId()).isEmpty());
 
-        return "andrewProfile";
+
+        return "redirect:/profile/"+user.getId();
     }
 
 

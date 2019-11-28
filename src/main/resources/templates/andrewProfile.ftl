@@ -139,33 +139,38 @@
         </#if>
 
         <#if !isHome>
-            <h4 style="margin: auto">Ваш отзыв</h4>
-            <form method="post"  class="estimate">
-                <div class="form-group">
 
-                    <label class="col-sm-4 col-form-label">Количество звезд</label>
-                    <div class="col-sm-6">
-                        <select class="form-control" id="exampleFormControlSelect1" name="stars">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+            <#if estAv>
+                <h4 style="margin: auto">Ваш отзыв</h4>
+                <form method="post"  class="estimate">
+                    <div class="form-group">
 
-                        </select>
-                    </div>
+                        <label class="col-sm-4 col-form-label">Количество звезд</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="exampleFormControlSelect1" name="stars">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
 
-                    <label class="col-sm-2 col-form-label mt-3">Комментарий</label>
-                    <div class="col-sm-6">
+                            </select>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label mt-3">Комментарий</label>
+                        <div class="col-sm-6">
                             <textarea rows="3" name="comment"
                                       class="form-control">
                             </textarea>
-                    </div>
+                        </div>
 
-                </div>
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                <div class="col-sm-6"><input type="submit" class="btn btn-primary btn-bg" value="Save"/></div>
-            </form>
+                    </div>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                    <div class="col-sm-6"><input type="submit" class="btn btn-primary btn-bg" value="Save"/></div>
+                </form>
+            <#else>
+                <h4>Оставить отзыв можно только после сотрудничества</h4>
+            </#if>
         </#if>
     </div>
 
