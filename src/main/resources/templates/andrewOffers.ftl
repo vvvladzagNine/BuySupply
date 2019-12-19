@@ -48,7 +48,7 @@
 
                 <div class="mt-3"><label for="exampleFormControlSelect1 ">Тип предложения</label></div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked value="buy" name="buy">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="buy" name="buy">
                     <label class="form-check-label" for="inlineCheckbox1"><i class="fas fa-cart-arrow-down"></i></label>
                 </div>
                 <div class="form-check form-check-inline">

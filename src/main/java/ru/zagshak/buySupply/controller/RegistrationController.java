@@ -3,6 +3,7 @@ package ru.zagshak.buySupply.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,8 @@ public class RegistrationController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String city,
-            @RequestParam String username
+            @RequestParam String username,
+            Model model
             ) {
         User u = new User();
         u.setPassword(password);
@@ -37,8 +39,10 @@ public class RegistrationController {
         u.setCity(city);
         u.setName(username);
         u.setRoles(Collections.singleton(Role.ROLE_USER));
+        u.setAva("default.png");
 
         userService.create(u);
-        return "andrewRegistration";
+        model.addAttribute("sucreg","sucreg");
+        return "andrewLogin";
     }
 }

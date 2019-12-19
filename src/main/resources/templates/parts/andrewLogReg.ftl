@@ -15,7 +15,7 @@
             body {
                 /* Цвет фона и путь к файлу */
                 color: #000000; /* Цвет текста */
-                background: #e9edea fixed;
+                background: #ede9e9 fixed;
                 background-size: 100%;
             }
 

@@ -11,7 +11,7 @@
             <h2>${user.name}</h2>
             <p>${user.email}</p>
             <#if avg??>
-                <p>${avg}</p>
+                <p>Рейтинг: ${avg} из 5</p>
             <#else>
                 Отзывов нет
             </#if>
@@ -20,7 +20,7 @@
 
         <div class="info">
             <p>Город: ${user.city}<br>
-                Дата регистрации: 17.07.2019<br></p>
+               Дата регистрации: ${user.registered}<br></p>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <a class="text-primary" href="/offer/#{offer.id}">${offer.description}</a>
+                                    <a class="text-primary" href="/offer/#{offer.getId()}">${offer.description}</a>
                                 </div>
                                 <div class="col">
                                     <span class="text-dark">${offer.cost} $</span>
@@ -62,10 +62,10 @@
                                 <div class="col">
                                     <#if offer.buyOffer>Buy<#else>Supply</#if>
                                 </div>
-                                <#if offer.id == me.id>
+                                <#if offer.getId() == me.getId()>
                                     <div class="col">
                                         <form method="post">
-                                            <input type="hidden" name="id" value="${offer.id}" />
+                                            <input type="hidden" name="id" value="${offer.getId()}" />
                                             <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                             <button class="btn btn-secondary ml-3" role="button">Х</button>
                                         </form>
@@ -101,12 +101,12 @@
 
                             <div class="estimator-info">
                                 <#if est.estimator.ava??>
-                                    <a href="profile/#{est.estimator.getId()}">
+                                    <a href="#{est.estimator.getId()}">
                                         <img src="/img/${est.estimator.ava}" class="rounded float-left estimate-image">
                                     </a>
                                 </#if>
                                     <div class="name-rank">
-                                        <div><p><a href="profile/#{est.estimator.getId()}">${est.estimator.name}</a></p></div>
+                                        <div><p><a href="#{est.estimator.getId()}">${est.estimator.name}</a></p></div>
                                         <div>
                                             <#if (est.stars >= 1)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
                                             <#if (est.stars >= 2)><span class="fa fa-star checked"></span> <#else> <span class="fa fa-star"></span> </#if>
@@ -118,7 +118,7 @@
                             </div>
 
                             <div>
-                                <p>12.09.2018</p>
+                                <p>${est.dateTime.toLocalDate()}</p>
                             </div>
                         </div>
 

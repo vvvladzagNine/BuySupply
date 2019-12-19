@@ -3,7 +3,14 @@
     <div class="container mt-17">
         <div class="row">
             <div class="col"></div>
-            <div class="col-8"><h2 class="text-center mt-10">Мои поставки</h2></div>
+            <div class="col-8">
+                <#if sup??>
+                    <h2 class="text-center mt-10">Мои поставки</h2>
+                    <#else>
+                        <h2 class="text-center mt-10">Мои заказы</h2>
+                </#if>
+
+            </div>
             <div class="col"></div>
         </div>
 

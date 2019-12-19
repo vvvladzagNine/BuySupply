@@ -1,6 +1,6 @@
 <#import "parts/base.ftl" as b>
 <@b.page>
-    <h1>Вход</h1>
+    <h1>Вхот</h1>
     <form style="max-width: 400px" action="login" method="post">
         <div  class="form-group">
             <label for="exampleInputName1"> User Name : </label>
@@ -15,4 +15,7 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <input class="btn btn-dark" type="submit" value="Sign In"/></div>
     </form>
+    <#if error??>
+        <h3 style="color:red">${error}</h3>
+    </#if>
 </@b.page>

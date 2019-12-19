@@ -15,7 +15,6 @@ INSERT INTO users (name, email, password,city,photo) VALUES
 ('Поставщик проводов','TheWires@mail.ru', 'password', 'Moscow', 'Кабельщик.jpg'),
 ('Секонд Хэнд','VeslaC@mail.ru', 'password', 'Moscow', 'Секонд хэнд.jpg');
 
-
 INSERT INTO user_roles (role, user_id) VALUES
 ('ROLE_USER', 100000),
 ('ROLE_USER', 100001),

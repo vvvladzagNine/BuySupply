@@ -61,8 +61,16 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@RequestParam(required = false) String error,Model model) {
+
+        model.addAttribute("error",error);
         return "andrewLogin";
+    }
+
+    @GetMapping("/logout")
+    public String lout() {
+
+        return "andrewMainPage";
     }
 
     @GetMapping("/profile/{user}")
@@ -74,6 +82,13 @@ public class UserController {
 
             ){
 
+        List<Request> requests = requestJpaRepo.findAll();
+        requests=requests.stream().filter(o->o.isResponced())
+                .filter(o->((o.getOffer().getOfferer().getId().equals(currentUser.getId()) && o.getRequester().getId().equals(user.getId()))
+                || (o.getOffer().getOfferer().getId().equals(user.getId()) && o.getRequester().getId().equals(currentUser.getId()))))
+                .collect(Collectors.toList());
+
+
 
         if(!estimateService.getAllForEstimated(user.getId()).isEmpty())
             model.addAttribute("avg",estimateService.getAllForEstimated(user.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
@@ -82,7 +97,7 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
-        model.addAttribute("estAv",!requestJpaRepo.getToCheckEstimating(currentUser.getId(),user.getId()).isEmpty());
+        model.addAttribute("estAv",!requests.isEmpty());
         return "andrewProfile";
     }
 
@@ -96,11 +111,19 @@ public class UserController {
             @AuthenticationPrincipal User currentUser
 
     ){
-        if(estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId())!=null){
-            Estimate est = estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId());
+        if(estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId())!=null ){
+                Estimate est = estimateJPARepo.getAllByEstimatedIdAndEstimatorId(user.getId(),currentUser.getId());
             estimateService.delete(est.getId(),currentUser.getId());
         }
         estimateService.create(new Estimate(Integer.parseInt(stars),comment, LocalDateTime.now()),user.getId(),currentUser.getId());
+
+
+
+        List<Request> requests = requestJpaRepo.findAll();
+        requests=requests.stream().filter(o->o.isResponced())
+                .filter(o->((o.getOffer().getOfferer().getId().equals(currentUser.getId()) && o.getRequester().getId().equals(user.getId()))
+                        || (o.getOffer().getOfferer().getId().equals(user.getId()) && o.getRequester().getId().equals(currentUser.getId()))))
+                .collect(Collectors.toList());
 
         if(!estimateService.getAllForEstimated(user.getId()).isEmpty())
             model.addAttribute("avg",estimateService.getAllForEstimated(user.getId()).stream().mapToInt(o->o.getStars()).average().getAsDouble());
@@ -109,7 +132,7 @@ public class UserController {
         model.addAttribute("estimates",estimateService.getAllForEstimated(user.getId()));
         model.addAttribute("offers",offerJpaRepo.getAllByOffereId(user.getId()).stream().map(o -> {if(o.getDescription().length()>6)o.setDescription(o.getDescription().substring(0,6)+"...");return  o;}).collect(Collectors.toList()));
         model.addAttribute("me",user);
-        model.addAttribute("estAv",!requestJpaRepo.getToCheckEstimating(currentUser.getId(),user.getId()).isEmpty());
+        model.addAttribute("estAv",requests);
 
 
         return "redirect:/profile/"+user.getId();
@@ -187,6 +210,7 @@ public class UserController {
         ofs.addAll(offerJpaRepo.getOfferByRequestUserSupply(me.getId()));
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);
+        model.addAttribute("sup","sup");
         return "mySupplies";
     }
 
