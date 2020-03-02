@@ -31,7 +31,7 @@
 
             </div>
             <div class="col-4 border-left border-right border-white">
-                <label for="exampleFormControlSelect1">Цена за одну еденицу</label>
+                <label for="exampleFormControlSelect1">Цена за одну еденицу $</label>
 
                 <div class="row">
                     <div class="col">
@@ -59,12 +59,20 @@
             </div>
             <div class="col-4">
 
-                <label for="exampleFormControlSelect1">Название поставщика</label>
-                <div class="row ml-1 mr-1">
-                    <input type="text" name="offererName" value=""
-                           class="form-control"
-                           placeholder="" />
-                </div>
+
+                    <label for="exampleFormControlSelect1 ml-2">Название поставщика</label>
+                    <div class="row ml-1 mr-1">
+                        <input type="text" name="offererName" value=""
+                               class="form-control"
+                               placeholder="Сбербанк" />
+                    </div>
+
+
+                <label for="exampleFormControlSelect1">Город</label>
+                <input type="text" name="city" value=""
+                       class="form-control"
+                       placeholder="Нур-Султан" />
+
             </div>
         </div>
         <div class="row mt-3 mb-3">
