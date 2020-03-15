@@ -37,7 +37,8 @@ public class OfferUtil {
             Integer pricePerUnitFrom,
             Integer pricePerUnitTo,
             String fragment,
-            String offererName
+            String offererName,
+            String city
     ){
         return original
                 .stream()
@@ -47,6 +48,7 @@ public class OfferUtil {
                 .filter( t -> pricePerUnitTo==null || (t.getCost()/t.getAmount())<=pricePerUnitTo)
                 .filter( e -> fragment==null ||  fragment.isEmpty() || fragment.length()<=2 ||  (e.getDescription().contains(fragment)))
                 .filter( r -> offererName==null ||  offererName.isEmpty() || (r.getOfferer().getName().contains(offererName)))
+                .filter( r -> city==null ||  city.isEmpty() || (r.getOfferer().getCity().equals(city)))
                 .collect(Collectors.toList());
     }
 }

@@ -57,7 +57,8 @@ public class OfferController {
             @RequestParam(required = false) Integer pricePerUnitFrom,
             @RequestParam(required = false) Integer pricePerUnitTo,
             @RequestParam(required = false) String fragment,
-            @RequestParam(required = false) String offererName
+            @RequestParam(required = false) String offererName,
+            @RequestParam(required = false) String city
     ){
         Boolean isBuyOffer=null;
         if(buy!=null) isBuyOffer=true;
@@ -65,7 +66,7 @@ public class OfferController {
         if(buy!=null && supply!=null)isBuyOffer=null;
         List<Offer> ofs = new ArrayList<>();
         ofs = offerService.getAll();
-        ofs= OfferUtil.filterOffer(ofs,categoryName,isBuyOffer,pricePerUnitFrom,pricePerUnitTo,fragment,offererName);
+        ofs= OfferUtil.filterOffer(ofs,categoryName,isBuyOffer,pricePerUnitFrom,pricePerUnitTo,fragment,offererName,city);
         ofs.stream().map(o -> {if(o.getDescription().length()>10)o.setDescription(o.getDescription().substring(0,9)+"...");return  o;}).collect(Collectors.toList());
         model.addAttribute("offers",ofs);
         model.addAttribute("me",me);

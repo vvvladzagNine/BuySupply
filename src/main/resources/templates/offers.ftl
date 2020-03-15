@@ -1,11 +1,12 @@
 <#import "parts/base.ftl" as b>
 <@b.page>
 
+    <script type="text/javascript" src="../static/js/offers.js" defer></script>
 
     <div class="container mt-17">
         <div class="row">
             <div class="col"></div>
-            <div class="col-8"><h2 class="text-center mt-10">Рынок предложений</h2></div>
+            <div class="col-8"><h2 class="text-center mt-10">Рынок предложений1</h2></div>
             <div class="col"></div>
         </div>
 
@@ -14,9 +15,6 @@
             <div class="col"></div>
             <div class="col-12">
 
-                <div>
-
-                </div>
                 <ul class="list-group">
                     <li class="list-group-item ">
                         <div class="container">
@@ -98,11 +96,8 @@
                                         </form>
                                         </#if>
                                     </div>
-
-
                             </div>
                         </div>
-
                     </li>
                 </#list>
                 </ul>
