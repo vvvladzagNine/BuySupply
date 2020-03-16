@@ -1,5 +1,8 @@
 const offersApiUrl = "/rest/offer";
 let context, form;
+let failedNote;
+creds=$("#creds").text()
+
 
 
 function updateFilteredTable() {
@@ -7,8 +10,9 @@ function updateFilteredTable() {
         type: "GET",
         url: offersApiUrl,
         data: $("#filter").serialize(),
+        dataType: 'json',
         headers: {
-            "Authorization": "Basic dTpw"
+            "Authorization": "Basic "+btoa(creds)
         },
 
     },).done(updateTableByData);
@@ -24,7 +28,7 @@ function makeEditable(ctx) {
                     "url": context.ajaxUrl,
                     "dataSrc": "",
                     "headers": {
-                        "Authorization": "Basic dTpw"
+                        "Authorization": "Basic "+btoa(creds)
                     },
                 }
             }
@@ -38,11 +42,6 @@ function makeEditable(ctx) {
     // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
     $.ajaxSetup({cache: false});
 
-    const token = $("meta[name='_csrf']").attr("content");
-    const header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
 }
 
 function updateTableByData(data) {
@@ -50,7 +49,7 @@ function updateTableByData(data) {
 }
 
 
-let failedNote;
+
 
 function closeNoty() {
     if (failedNote) {
@@ -69,21 +68,37 @@ function failNoty(jqXHR) {
     }).show();
 }
 
-
 $(function () {
     makeEditable({
         ajaxUrl: offersApiUrl,
         datatableOpts: {
             "columns": [
+
                 {
                     "data": "description"
                 },
                 {
-                    "data": "description"
+                    "data": "cost"
                 },
                 {
-                    "data": "description"
+                    "data": "amount"
+                },
+                {
+                    "data": "category",
+                    "render": function (data, type, full, meta) {
+                        return '<span>' + data.name + '</span>'
+                    }
+                },
+                {
+                    "data": "dateTime"
+                },
+                {
+                    "data": "id",
+                    "render": function (data, type, full, meta) {
+                        return '<a href="/offer/' + data + '" style="color:grey"><i class="fas fa-ellipsis-h fa-2x"></i></a>';
+                    }
                 }
+
             ],
             "order": [
                 [
@@ -96,3 +111,5 @@ $(function () {
     });
 
 });
+
+

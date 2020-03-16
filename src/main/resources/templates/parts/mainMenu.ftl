@@ -1,3 +1,4 @@
+<#include "security.ftl">
 <div class="menu-1">
     <a href="/home" class="menu-button">Мой профиль</a>
     <a href="/home/buys" class="menu-button">Заказы</a>

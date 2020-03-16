@@ -16,17 +16,19 @@ public class OfferUtil {
             Integer pricePerUnitFrom,
             Integer pricePerUnitTo,
             String fragment,
-            String offererName
+            String offererName,
+            String city
     ){
-        return original;
-//                .stream()
-//                .filter( f -> categoryName==null || categoryName.equals(f.getCategory().getName()))
-//                .filter( i -> isBuyOffer==null || !Boolean.logicalXor(isBuyOffer,i.isBuyOffer()))
-//                .filter( l -> pricePerUnitFrom==null || (l.getCost()/l.getAmount())>=pricePerUnitFrom)
-//                .filter( t -> pricePerUnitTo==null || (t.getCost()/t.getAmount())<=pricePerUnitTo)
-//                .filter( e -> fragment==null || fragment.length()<=2 ||  (e.getDescription().contains(fragment)))
-//                .filter( r -> offererName==null ||  (r.getOffererName().contains(offererName)))
-//                .collect(Collectors.toList());
+        return
+        original.stream()
+                .filter( f -> categoryName==null || categoryName.isEmpty() || categoryName.equals(f.getCategory().getName()))
+                .filter( i -> isBuyOffer==null || !Boolean.logicalXor(isBuyOffer,i.isBuyOffer()))
+                .filter( l -> pricePerUnitFrom==null || (l.getCost()/l.getAmount())>=pricePerUnitFrom)
+                .filter( t -> pricePerUnitTo==null || (t.getCost()/t.getAmount())<=pricePerUnitTo)
+                .filter( e -> fragment==null || fragment.isEmpty() || fragment.length()<=2 ||  (e.getDescription().contains(fragment)))
+                .filter( r -> offererName==null || offererName.isEmpty() ||  (r.getOffererName().contains(offererName)))
+
+                .collect(Collectors.toList());
     }
 
 

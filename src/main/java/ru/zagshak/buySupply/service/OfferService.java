@@ -70,7 +70,8 @@ public class OfferService {
                 pricePerUnitFrom,
                 pricePerUnitTo,
                 fragment,
-                offererName
+                offererName,
+                ""
 
         );
     }
