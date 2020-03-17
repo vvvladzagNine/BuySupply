@@ -2,12 +2,6 @@ package ru.zagshak.buySupply.domain.to.OfferTO;
 
 import ru.zagshak.buySupply.domain.Category;
 import ru.zagshak.buySupply.domain.Offer;
-import ru.zagshak.buySupply.domain.User;
-
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 public class OfferTO {
