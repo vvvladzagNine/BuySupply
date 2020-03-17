@@ -25,8 +25,8 @@ public class OfferUtil {
                 .filter( i -> isBuyOffer==null || !Boolean.logicalXor(isBuyOffer,i.isBuyOffer()))
                 .filter( l -> pricePerUnitFrom==null || (l.getCost()/l.getAmount())>=pricePerUnitFrom)
                 .filter( t -> pricePerUnitTo==null || (t.getCost()/t.getAmount())<=pricePerUnitTo)
-                .filter( e -> fragment==null || fragment.isEmpty() || fragment.length()<=2 ||  (e.getDescription().contains(fragment)))
-                .filter( r -> offererName==null || offererName.isEmpty() ||  (r.getOffererName().contains(offererName)))
+                .filter( e -> fragment==null || fragment.isEmpty() || fragment.length()<=2 ||  (e.getDescription().toLowerCase().contains(fragment.toLowerCase())))
+                .filter( r -> offererName==null || offererName.isEmpty() ||  (r.getOffererName().toLowerCase().contains(offererName.toLowerCase())))
 
                 .collect(Collectors.toList());
     }

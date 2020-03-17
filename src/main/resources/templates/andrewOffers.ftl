@@ -17,7 +17,7 @@
                 <form method="get" id="filter">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Тип товара</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="categoryName">
+                        <select class="form-control" onchange="updateFilteredTable()" id="exampleFormControlSelect1" name="categoryName">
                             <option></option>
                             <#list types as g>
                                 <option>${g}</option>
@@ -26,7 +26,7 @@
                         </select>
                         <div class="mt-3"><label for="exampleFormControlSelect1">Описание</label></div>
                         <div class="row ml-1 mr-1">
-                            <input type="text" name="fragment" value=""
+                            <input type="text" name="fragment" oninput="updateFilteredTable()" value=""
                                    class="form-control"
                                    placeholder=""/>
                         </div>
@@ -39,12 +39,12 @@
 
                 <div class="row">
                     <div class="col">
-                        <input type="text" name="pricePerUnitFrom" value=""
+                        <input type="text" name="pricePerUnitFrom" oninput="updateFilteredTable()" value=""
                                class="form-control"
                                placeholder="От"/>
                     </div>
                     <div class="col">
-                        <input type="text" name="pricePerUnitTo" value=""
+                        <input type="text" name="pricePerUnitTo" oninput="updateFilteredTable()" value=""
                                class="form-control"
                                placeholder="До"/>
                     </div>
@@ -66,14 +66,14 @@
 
                 <label for="exampleFormControlSelect1 ml-2">Название поставщика</label>
                 <div class="row ml-1 mr-1">
-                    <input type="text" name="offererName" value=""
+                    <input type="text" name="offererName" oninput="updateFilteredTable()" value=""
                            class="form-control"
                            placeholder="Сбербанк"/>
                 </div>
 
 
                 <label for="exampleFormControlSelect1">Город</label>
-                <input type="text" name="city" value=""
+                <input type="text" name="city" oninput="updateFilteredTable()" value=""
                        class="form-control"
                        placeholder="Нур-Султан"/>
 
@@ -82,13 +82,11 @@
         <div class="row mt-3 mb-3">
 
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <div class="col"><input type="submit" class="btn btn-dark btn-lg btn-block" value="Поиск"/></div>
+            <div class="col"></div>
 
         </div>
         <div class="row"></div>
         </form>
-        <button class="btn btn-danger" onclick="updateFilteredTable()">ПОИСК</button>
-
 
     </div>
 

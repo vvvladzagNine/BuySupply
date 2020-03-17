@@ -3,23 +3,45 @@ let context, form;
 let failedNote;
 creds=$("#creds").text()
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function refresher() {
+    while (true) {
+        $.ajax({
+            type: "GET",
+            url: offersApiUrl,
+            data: $("#filter").serialize(),
+            dataType: 'json',
+            headers: {
+                "Authorization": "Basic "+btoa(creds)
+            },
 
+        },).done(updateTableByData);
+        await sleep(2000)
+
+    }
+}
 function updateFilteredTable() {
-    $.ajax({
-        type: "GET",
-        url: offersApiUrl,
-        data: $("#filter").serialize(),
-        dataType: 'json',
-        headers: {
-            "Authorization": "Basic "+btoa(creds)
-        },
 
-    },).done(updateTableByData);
+        $.ajax({
+            type: "GET",
+            url: offersApiUrl,
+            data: $("#filter").serialize(),
+            dataType: 'json',
+            headers: {
+                "Authorization": "Basic "+btoa(creds)
+            },
+
+        },).done(updateTableByData);
+
+
 }
 
 function makeEditable(ctx) {
     context = ctx;
+
     context.datatableApi = $("#datatable").DataTable(
         //https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
         $.extend(true, ctx.datatableOpts,
@@ -33,6 +55,7 @@ function makeEditable(ctx) {
                 }
             }
         ));
+
 
     form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
@@ -109,6 +132,7 @@ $(function () {
         },
         updateTable: updateFilteredTable
     });
+    refresher()
 
 });
 
