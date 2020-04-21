@@ -1,5 +1,8 @@
 <#import "parts/andrewLogReg.ftl" as lg>
 <@lg.page>
+
+    <script type="text/javascript" src="static/js/registration.js" defer></script>
+
     <div class="logreg">
         <h1>Регистрация</h1>
         <form style="max-width: 400px" action="/registration" method="post">
@@ -23,9 +26,17 @@
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
             </div>
 
+            <div class="form-group">
+                <label for="exampleInputPassword2">Еще раз паролик: </label>
+                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"/>
+            </div>
+
             <div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                <input class="btn btn-primary" type="submit" value="Sign up"/></div>
+                <input class="btn btn-primary" type="submit" value="Sign up" id="singup_but"/></div>
         </form>
+        <div class="mt-3">
+            <h4 style="color: red" id="error_message"></h4>
+        </div>
     </div>
 </@lg.page>
