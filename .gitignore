@@ -31,3 +31,4 @@ build/
 ### VS Code ###
 .vscode/
 /log/buysupply.log
+src/main/resources/uploads
