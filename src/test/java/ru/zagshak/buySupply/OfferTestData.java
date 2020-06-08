@@ -5,6 +5,7 @@ import ru.zagshak.buySupply.domain.Offer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,6 +34,6 @@ public class OfferTestData {
     }
 
     public static void assertMatch(Iterable<Offer> actual, Offer... expected) {
-        assertMatch(actual, List.of(expected));
+        assertMatch(actual, Arrays.asList(expected));
     }
 }

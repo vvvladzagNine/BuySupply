@@ -4,6 +4,7 @@ import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Request;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +32,6 @@ public class EstimateTestData {
     }
 
     public static void assertMatch(Iterable<Estimate> actual, Estimate... expected) {
-        assertMatch(actual, List.of(expected));
+        assertMatch(actual, Arrays.asList(expected));
     }
 }

@@ -2,6 +2,7 @@ package ru.zagshak.buySupply;
 
 import ru.zagshak.buySupply.domain.Request;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,6 @@ public class RequestTestData {
     }
 
     public static void assertMatch(Iterable<Request> actual, Request... expected) {
-        assertMatch(actual, List.of(expected));
+        assertMatch(actual, Arrays.asList(expected));
     }
 }

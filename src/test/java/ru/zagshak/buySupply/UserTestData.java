@@ -3,6 +3,7 @@ package ru.zagshak.buySupply;
 import ru.zagshak.buySupply.domain.Role;
 import ru.zagshak.buySupply.domain.User;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,7 @@ public class UserTestData {
     }
 
     public static void assertMatch(Iterable<User> actual, User... expected) {
-        assertMatch(actual, List.of(expected));
+        assertMatch(actual, Arrays.asList(expected));
     }
 
     public static void assertMatch(Iterable<User> actual, Iterable<User> expected) {
