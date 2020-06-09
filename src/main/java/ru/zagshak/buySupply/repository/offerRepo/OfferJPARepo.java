@@ -19,7 +19,7 @@ public interface OfferJPARepo extends JpaRepository<Offer,Integer> {
     int delete(@Param("id") int id, @Param("userId") int userId);
 
     @Query("SELECT m FROM Offer m WHERE m.offerer.id=:id")
-    List<Offer> getAllByOffereId(int id);
+    List<Offer> getAllByOffereId(@Param("id") int id);
 
 
 

@@ -48,6 +48,4 @@ public class OfferRepoImpl implements OfferRepo {
         return repo.findById(id).orElse(null);
     }
 
-
-
 }
