@@ -56,7 +56,7 @@ public class UserController {
     @Autowired
     private EstimateJPARepo estimateJPARepo;
 
-    @Value("classpath:/uploads/")
+    @Value("/uploads/")
     private String uploadPath;
 
 
