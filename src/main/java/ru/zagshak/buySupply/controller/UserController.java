@@ -1,6 +1,5 @@
 package ru.zagshak.buySupply.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.ClassPathResource;
 import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
@@ -56,7 +56,7 @@ public class UserController {
     @Autowired
     private EstimateJPARepo estimateJPARepo;
 
-    @Value("/uploads/")
+    @Value("${upload.path}")
     private String uploadPath;
 
 
@@ -268,7 +268,13 @@ public class UserController {
             ) throws IOException {
         model.addAttribute("user",user);
         if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
+            //File uploadDir = new File(uploadPath);
+            File uploadDir = new ClassPathResource("uploads").getFile();
+            System.out.println("+++++ " + uploadDir.getPath());
+
+            for (String foldFile: uploadDir.list()) {
+                System.out.println("++++++ foldFile +++++" + foldFile);
+            }
 
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
@@ -276,7 +282,7 @@ public class UserController {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            file.transferTo(new File(uploadDir.getPath() + "/" + resultFilename));
 
             user.setAva(resultFilename);
         }
