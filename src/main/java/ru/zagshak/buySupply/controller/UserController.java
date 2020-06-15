@@ -2,6 +2,7 @@ package ru.zagshak.buySupply.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
@@ -34,6 +36,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @Autowired
     private RequestService requestService;
@@ -269,7 +274,11 @@ public class UserController {
         model.addAttribute("user",user);
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             //File uploadDir = new File(uploadPath);
-            File uploadDir = new ClassPathResource("uploads").getFile();
+
+
+            Resource resource = resourceLoader.getResource("classpath:uploads");
+            //File uploadDir = new ClassPathResource("uploads").getFile();
+            File uploadDir = resource.getFile();
             System.out.println("+++++ " + uploadDir.getPath());
 
             for (String foldFile: uploadDir.list()) {
