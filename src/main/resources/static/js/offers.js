@@ -9,17 +9,17 @@ function sleep(ms) {
 
 async function refresher() {
     while (true) {
-        $.ajax({
-            type: "GET",
-            url: offersApiUrl,
-            data: $("#filter").serialize(),
-            dataType: 'json',
-            headers: {
-                "Authorization": "Basic "+btoa(creds)
-            },
+    $.ajax({
+        type: "GET",
+        url: offersApiUrl,
+        data: $("#filter").serialize(),
+        dataType: 'json',
+        headers: {
+            "Authorization": "Basic "+btoa(creds)
+        },
 
-        },).done(updateTableByData);
-        await sleep(2000)
+    },).done(updateTableByData);
+    await sleep(2000)
 
     }
 }
@@ -46,6 +46,7 @@ function makeEditable(ctx) {
         //https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
         $.extend(true, ctx.datatableOpts,
             {
+                "paging": false,
                 "ajax": {
                     "url": context.ajaxUrl,
                     "dataSrc": "",

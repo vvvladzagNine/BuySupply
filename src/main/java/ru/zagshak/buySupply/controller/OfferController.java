@@ -83,6 +83,7 @@ public class OfferController {
         Offer f =offerService.get(id);
         model.addAttribute("offer",f);
         model.addAttribute("me",me);
+        model.addAttribute("user",me);
         Request r = requestJpaRepo.getForRequester(f.getId(),me.getId());
         model.addAttribute("req",r);
         return "offer";
@@ -92,6 +93,7 @@ public class OfferController {
 
     @PostMapping(value = "/offer/{id}",params={"message"})
     public String makeRequest(
+            Model model,
             @AuthenticationPrincipal User me,
             @PathVariable int id,
             @RequestParam String message){

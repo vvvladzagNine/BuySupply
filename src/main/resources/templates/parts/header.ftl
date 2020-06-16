@@ -4,7 +4,7 @@
 </div>
 
 <div class="header-buttons">
-    <#if user??>
+    <#if user?? || me??>
         <a class="btn btn-primary" href="/">Выход</a>
         <a class="btn btn-primary ml-2" href="/edit_profile/">Редактировать профиль</a>
         <#else>

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.ResourceLoader;
 import ru.zagshak.buySupply.domain.Estimate;
 import ru.zagshak.buySupply.domain.Offer;
 import ru.zagshak.buySupply.domain.Request;
@@ -36,9 +34,6 @@ import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
-
-    @Autowired
-    ResourceLoader resourceLoader;
 
     @Autowired
     private RequestService requestService;
@@ -273,17 +268,9 @@ public class UserController {
             ) throws IOException {
         model.addAttribute("user",user);
         if (file != null && !file.getOriginalFilename().isEmpty()) {
-            //File uploadDir = new File(uploadPath);
+            File uploadDir = new File(uploadPath);
 
-
-            Resource resource = resourceLoader.getResource("classpath:uploads");
-            //File uploadDir = new ClassPathResource("uploads").getFile();
-            File uploadDir = resource.getFile();
             System.out.println("+++++ " + uploadDir.getPath());
-
-            for (String foldFile: uploadDir.list()) {
-                System.out.println("++++++ foldFile +++++" + foldFile);
-            }
 
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
