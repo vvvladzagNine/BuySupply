@@ -1,0 +1,35 @@
+server:
+  port: 8080
+zuul:
+  routes:
+    static-manager:
+      path: /static/**
+      url: https://fierce-crag-61206.herokuapp.com/static/
+    img-manager:
+      path: /img/**
+      url: https://fierce-crag-61206.herokuapp.com/img/
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    ddl-auto: validate
+    name: buy-supply
+    servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
+        enabled: true
+
+  freemarker:
+    expose-request-attributes: true
+
+  datasource:
+    url: jdbc:postgresql://localhost/buysupply
+    username: postgres
+    password:
+
+upload:
+  path: /Users/andrewshakirov/IdeaProjects/BuySupply/uploads

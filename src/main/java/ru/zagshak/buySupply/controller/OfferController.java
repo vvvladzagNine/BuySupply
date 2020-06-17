@@ -121,7 +121,11 @@ public class OfferController {
     }
 
     @GetMapping("/offers/create")
-    public String offersCreate(Model model){
+    public String offersCreate(
+            Model model,
+            @AuthenticationPrincipal User me
+    ){
+        model.addAttribute("me",me);
         model.addAttribute("categories",categoryJPARepo.findAll());
         return "andrewCreateOffer";
     }
